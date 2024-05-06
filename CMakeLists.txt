@@ -33,4 +33,6 @@ set(LINK_LIB PRIVATE glfw OpenGL::GL GLEW::GLEW glad::glad glm::glm spdlog::spdl
 
 add_subdirectory(${AZUR_PATH})
 add_subdirectory(${Sandbox_PATH})
-#message("")
+
+
+message(${CMAKE_BUILD_TYPE})

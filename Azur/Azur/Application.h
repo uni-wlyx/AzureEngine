@@ -2,7 +2,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "Core.h"
+#include "Azur/Core.h"
+#include "Azur/Window/Window.h"
 
 namespace Azur {
     class AZUR_API Application {
@@ -15,6 +16,10 @@ namespace Azur {
 
     public:
         static Application *CreateApp();
+
+    private:
+        std::unique_ptr<Window> m_Window;
+        bool m_Running = true;
     };
 
 }

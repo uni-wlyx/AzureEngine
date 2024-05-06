@@ -7,14 +7,17 @@ project(${AZurLibeName} VERSION 0.1.0)
 get_filename_component(PARENT_FOLDER_ABSOLUTE2 ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 file(GLOB_RECURSE LIBSOURCE "*.cpp" "*.h")
 
-include_directories(${AZUR_PATH}/Azur)
+include_directories(${AZUR_PATH})
 
 #add_definitions(-DAZUR_PLATFORM_WINDOWS)
 add_definitions(-DAZUR_EXPORT)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DAZ_ENABLE_ASSERTS)
+endif ()
+
 
 add_library(${AZurLibeName} SHARED ${LIBSOURCE})
 
-
-
+target_precompile_headers(${AZurLibeName} PRIVATE azphc.h)
 #target_include_directories(${AZurLibeName} PRIVATE  "${CMAKE_CURRENT_LIST_DIR}/source")
 target_link_libraries(${AZurLibeName} ${LINK_LIB})
