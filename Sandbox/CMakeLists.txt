@@ -4,11 +4,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 MESSAGE("operation system is ${CMAKE_SYSTEM}")
 
+get_filename_component(PARENT_FOLDER_ABSOLUTE2 ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+file(GLOB_RECURSE SOURCE_FILE "*.cpp" "*.h")
 
 #message("${AZUR_PATH}")
 include_directories(${AZUR_PATH})
 link_directories(${LIB_PATH})
 
-add_executable(AzurEngine main.cpp)
+add_executable(AzurEngine ${SOURCE_FILE})
 
 target_link_libraries(AzurEngine ${LINK_LIB} Azur.dll)

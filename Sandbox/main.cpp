@@ -1,17 +1,15 @@
 #include <iostream>
 #include <Azur.h>
 
-class event {
 
-};
-
-class xxevent : public event {
+class ExampleLayer : public Azur::Layer{
 public:
-    int x, y;
+    void OnUpdate() override{
+//        AZ_INFO("ExampleLayer::Layer");
+    }
 
-    xxevent(int x, int y) {
-        this->x = x;
-        this->y = y;
+    void OnEvent(Azur::Event &event) override{
+        AZ_INFO("ExampleLayer::OnEvent");
     }
 };
 
@@ -20,6 +18,7 @@ int main() {
     AZ_CORE_INFO("Init Log");
 
     auto *app = Azur::Application::CreateApp();
+    app->PushLayer(new ExampleLayer());
     app->Run();
     delete app;
 

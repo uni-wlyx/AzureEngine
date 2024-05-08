@@ -1,9 +1,9 @@
 #include "azphc.h"
 #include "WindowsWindow.h"
 
-#include "Azur/Event/ApplicationEvent.h"
-#include "Azur/Event/KeyEvent.h"
-#include "Azur/Event/MouseEvent.h"
+#include "Azur/Events/ApplicationEvent.h"
+#include "Azur/Events/KeyEvent.h"
+#include "Azur/Events/MouseEvent.h"
 
 namespace Azur {
 

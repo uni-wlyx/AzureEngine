@@ -2,7 +2,7 @@
 #ifndef KEYEVENT_H
 #define KEYEVENT_H
 
-#include "Azur/Event/Event.h"
+#include "Azur/Events/Event.h"
 #include "Azur/Core/KeyCodes.h"
 
 namespace Azur {

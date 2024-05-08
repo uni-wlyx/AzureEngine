@@ -5,7 +5,7 @@
 #include "azphc.h"
 
 #include "Azur/Core.h"
-#include "Azur/Event/Event.h"
+#include "Azur/Events/Event.h"
 
 namespace Azur {
 

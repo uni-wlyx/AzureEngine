@@ -4,7 +4,8 @@
 
 #include "Azur/Core.h"
 #include "Azur/Window/Window.h"
-#include <Azur/Event/ApplicationEvent.h>
+#include "Azur/Events/ApplicationEvent.h"
+#include "Azur/Core/LayerStack.h"
 
 namespace Azur {
     class AZUR_API Application {
@@ -14,15 +15,19 @@ namespace Azur {
         virtual ~Application();
 
         void Run();
+        void OnEvent(Event& event);
+
+        void PushLayer(Layer* layer);
+        void PushOverlay(Layer* overlay);
 
     public:
         static Application *CreateApp();
 
     private:
         std::unique_ptr<Window> m_Window;
-        bool m_Running = true;
+        LayerStack m_layerStack;
 
-        void OnEvent(Event& event);
+        bool m_Running = true;
 
         bool OnWindowClose(WindowCloseEvent& e);
     };

@@ -2,7 +2,7 @@
 #ifndef APPLICATIONEVENT_H
 #define APPLICATIONEVENT_H
 
-#include "Azur/Event/Event.h"
+#include "Azur/Events/Event.h"
 
 namespace Azur {
     class WindowResizeEvent : public Event {

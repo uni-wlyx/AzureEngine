@@ -2,7 +2,7 @@
 #ifndef MOUSEEVENT_H
 #define MOUSEEVENT_H
 
-#include "Azur/Event/Event.h"
+#include "Azur/Events/Event.h"
 #include "Azur/Core/MouseCodes.h"
 
 namespace Azur{
