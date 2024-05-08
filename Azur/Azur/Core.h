@@ -17,4 +17,7 @@
     #define AZ_CORE_ASSERT(x,...)
 #endif
 
+#define BIT(x) (1 << x)
+//绑定事件
+#define AZ_BIND_EVENT(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 #endif //CORE_H

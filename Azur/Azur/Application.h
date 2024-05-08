@@ -4,6 +4,7 @@
 
 #include "Azur/Core.h"
 #include "Azur/Window/Window.h"
+#include <Azur/Event/ApplicationEvent.h>
 
 namespace Azur {
     class AZUR_API Application {
@@ -20,6 +21,10 @@ namespace Azur {
     private:
         std::unique_ptr<Window> m_Window;
         bool m_Running = true;
+
+        void OnEvent(Event& event);
+
+        bool OnWindowClose(WindowCloseEvent& e);
     };
 
 }

@@ -5,7 +5,7 @@
 #include "azphc.h"
 
 #include "Azur/Core.h"
-//#include <>
+#include "Azur/Event/Event.h"
 
 namespace Azur {
 
@@ -23,6 +23,8 @@ namespace Azur {
 
     class AZUR_API Window {
     public:
+        using EventCallbackFn = std::function<void(Event &)>;
+
         virtual ~Window() = default;
 
         virtual void OnUpdate() = 0;
@@ -30,6 +32,8 @@ namespace Azur {
         virtual unsigned int GetWidth() const = 0;
 
         virtual unsigned int GetHeight() const = 0;
+
+        virtual void SetEventCallback(const EventCallbackFn &callback) = 0;
 
         static Window *Create(const WindowProps &props = WindowProps());
     };

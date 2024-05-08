@@ -20,6 +20,8 @@ namespace Azur {
 
         unsigned int GetHeight() const override { return m_Data.Height; };
 
+        void SetEventCallback(const EventCallbackFn &callback) override { m_Data.EventCallback = callback ;}
+
     private:
         virtual void Init(const WindowProps &props);
 
@@ -31,7 +33,8 @@ namespace Azur {
         struct WindowData {
             std::string Title;
             unsigned int Width, Height;
-            bool Vsync;
+
+            EventCallbackFn EventCallback;
         };
 
         WindowData m_Data;
