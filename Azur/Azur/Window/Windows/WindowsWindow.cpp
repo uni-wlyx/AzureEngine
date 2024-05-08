@@ -53,8 +53,11 @@ namespace Azur {
 
         m_window = glfwCreateWindow((int) m_Data.Width, (int) m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(m_window);
-        glfwSetWindowUserPointer(m_window, &m_Data);
 
+        int status = gladLoadGLLoader((GLADloadproc ) glfwGetProcAddress);
+        AZ_CORE_ASSERT(status,"Failed to initialize Glad");
+
+        glfwSetWindowUserPointer(m_window, &m_Data);
         glfwSetWindowSizeCallback(m_window, [](GLFWwindow *window, int width, int height) {
             WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
             data.Width = width;

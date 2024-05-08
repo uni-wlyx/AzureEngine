@@ -2,6 +2,7 @@
 #ifndef WINDOWSWINDOW_H
 #define WINDOWSWINDOW_H
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include "Azur/Window/Window.h"
