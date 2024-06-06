@@ -3,9 +3,14 @@
 #include "Azur/Log/AzurLog.h"
 
 namespace Azur {
+    Application *Application::s_instance = nullptr;
+
     Application::Application() {
-        m_Window = std::unique_ptr<Window>(Window::Create());
-        m_Window->SetEventCallback(AZ_BIND_EVENT(Application::OnEvent));
+        AZ_CORE_ASSERT(!s_instance, "Application already exists");
+        s_instance = this;
+
+        m_window = std::unique_ptr<Window>(Window::Create());
+        m_window->SetEventCallback(AZ_BIND_EVENT(Application::OnEvent));
     }
 
     Application::~Application() {
@@ -13,22 +18,24 @@ namespace Azur {
     }
 
     void Application::Run() {
-        while (m_Running) {
+        while (m_running) {
 
-            for(Layer* layer:m_layerStack){
+            for (Layer *layer: m_layerStack) {
                 layer->OnUpdate();
             }
 
-            m_Window->OnUpdate();
+            m_window->OnUpdate();
         }
     }
 
     void Application::PushLayer(Layer *layer) {
         m_layerStack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void Application::PushOverlay(Layer *overlay) {
         m_layerStack.PushOverlay(overlay);
+        overlay->OnAttach();
     }
 
     Application *Azur::Application::CreateApp() {
@@ -48,7 +55,7 @@ namespace Azur {
     }
 
     bool Application::OnWindowClose(WindowCloseEvent &e) {
-        m_Running = false;
+        m_running = false;
         return true;
     }
 

@@ -67,6 +67,7 @@ namespace Azur {
             data.EventCallback(event);
         });
 
+
         glfwSetWindowCloseCallback(m_window, [](GLFWwindow *window) {
             WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
             WindowCloseEvent event;
