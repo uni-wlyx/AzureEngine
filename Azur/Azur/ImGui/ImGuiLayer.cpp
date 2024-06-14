@@ -48,4 +48,32 @@ namespace Azur {
         Layer::OnEvent(event);
     }
 
+    bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent &e) {
+        return false;
+    }
+
+    bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent &e) {
+        return false;
+    }
+
+    bool ImGuiLayer::OnMouseMovedEvent(MouseMovedEvent &e) {
+        return false;
+    }
+
+    bool ImGuiLayer::OnMouseScrolledEvent(MouseScrolledEvent &e) {
+        return false;
+    }
+
+    bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent &e) {
+        return false;
+    }
+
+    bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent &e) {
+        return false;
+    }
+
+    bool ImGuiLayer::OnWindowResizedEvent(WindowResizeEvent &e) {
+        return false;
+    }
+
 } // Azur
