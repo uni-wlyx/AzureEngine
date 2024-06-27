@@ -3,7 +3,7 @@
 
 namespace Azur {
     LayerStack::LayerStack() {
-        m_layerInsert = m_layers.begin();
+
     }
 
     LayerStack::~LayerStack() {
@@ -13,7 +13,8 @@ namespace Azur {
 
     void LayerStack::PushLayer(Layer *layer) {
         //头插
-        m_layerInsert = m_layers.emplace(m_layerInsert, layer);
+        m_layers.emplace(m_layers.begin() + m_layerInsertIndex, layer);
+        ++m_layerInsertIndex;
     }
 
     void LayerStack::PushOverlay(Layer *overlay) {
@@ -25,7 +26,7 @@ namespace Azur {
         auto iter = std::find(m_layers.begin(), m_layers.end(), layer);
         if (iter != m_layers.end()) {
             m_layers.erase(iter);
-            m_layerInsert--;
+            m_layerInsertIndex--;
         }
     }
 

@@ -1,6 +1,7 @@
 
 #include "Application.h"
 #include "Azur/Log/AzurLog.h"
+#include "Input.h"
 
 namespace Azur {
     Application *Application::s_instance = nullptr;
@@ -11,6 +12,10 @@ namespace Azur {
 
         m_window = std::unique_ptr<Window>(Window::Create());
         m_window->SetEventCallback(AZ_BIND_EVENT(Application::OnEvent));
+
+        m_ImGuiLayer = new ImGuiLayer();
+        //stack会自动管理指针
+        PushOverlay(m_ImGuiLayer);
     }
 
     Application::~Application() {
@@ -23,6 +28,12 @@ namespace Azur {
             for (Layer *layer: m_layerStack) {
                 layer->OnUpdate();
             }
+
+            m_ImGuiLayer->Begin();
+            for (Layer *layer: m_layerStack) {
+                layer->OnImGuiRender();
+            }
+            m_ImGuiLayer->End();
 
             m_window->OnUpdate();
         }

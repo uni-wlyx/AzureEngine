@@ -7,6 +7,8 @@
 #include "Azur/Events/ApplicationEvent.h"
 #include "Azur/Core/LayerStack.h"
 
+#include "Azur/ImGui/ImGuiLayer.h"
+
 namespace Azur {
     class AZUR_API Application {
     public:
@@ -31,6 +33,7 @@ namespace Azur {
 
     private:
         std::unique_ptr<Window> m_window;
+        ImGuiLayer* m_ImGuiLayer;
         LayerStack m_layerStack;
 
         bool m_running = true;

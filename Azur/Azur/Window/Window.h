@@ -36,6 +36,8 @@ namespace Azur {
         virtual void SetEventCallback(const EventCallbackFn &callback) = 0;
 
         static Window *Create(const WindowProps &props = WindowProps());
+
+        virtual void *GetNativeWindow() const = 0;
     };
 }
 

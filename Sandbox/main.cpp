@@ -15,11 +15,12 @@ public:
 
 int main() {
     Azur::AzurLog::Init();
+
     AZ_CORE_INFO("Init Log");
 
     auto *app = Azur::Application::CreateApp();
-    app->PushLayer(new ExampleLayer());
-    app->PushOverlay(new Azur::ImGuiLayer());
+//    app->PushLayer(new ExampleLayer());
+//    app->PushOverlay(new Azur::ImGuiLayer());
     app->Run();
     delete app;
 

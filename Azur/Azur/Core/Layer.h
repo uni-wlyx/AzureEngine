@@ -19,6 +19,8 @@ namespace Azur {
 
         virtual void OnDetach() {}
 
+        virtual void OnImGuiRender() {};
+
         virtual void OnUpdate() {}
 
         virtual void OnEvent(Event &event) {}

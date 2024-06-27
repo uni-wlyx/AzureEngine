@@ -4,6 +4,7 @@
 #include "Azur/Events/ApplicationEvent.h"
 #include "Azur/Events/KeyEvent.h"
 #include "Azur/Events/MouseEvent.h"
+#include "WindowsInput.h"
 
 namespace Azur {
 
@@ -54,8 +55,8 @@ namespace Azur {
         m_window = glfwCreateWindow((int) m_Data.Width, (int) m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(m_window);
 
-        int status = gladLoadGLLoader((GLADloadproc ) glfwGetProcAddress);
-        AZ_CORE_ASSERT(status,"Failed to initialize Glad");
+        int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+        AZ_CORE_ASSERT(status, "Failed to initialize Glad");
 
         glfwSetWindowUserPointer(m_window, &m_Data);
         glfwSetWindowSizeCallback(m_window, [](GLFWwindow *window, int width, int height) {
@@ -112,10 +113,14 @@ namespace Azur {
                 }
             }
         });
-
+        
     }
 
     void WindowsWindow::ShutDown() {
         glfwDestroyWindow(m_window);
+    }
+
+    void *WindowsWindow::GetNativeWindow() const {
+        return m_window;
     }
 }

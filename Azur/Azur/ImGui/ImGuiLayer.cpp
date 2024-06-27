@@ -1,3 +1,4 @@
+#include <GLFW/glfw3.h>
 #include "azphc.h"
 #include "ImGuiLayer.h"
 #include "Azur/Core/Application.h"
@@ -12,68 +13,68 @@ namespace Azur {
     }
 
     void ImGuiLayer::OnAttach() {
+        IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGui::StyleColorsLight();
 
         ImGuiIO &io = ImGui::GetIO();
-        io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-        io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+//
+//    guiIo->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+//    guiIo->ConfigFlags |= ImGuiViewportFlags_NoDecoration;
+//    guiIo->ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+//        io->ConfigFlags |= ImGuiCol_DockingEmptyBg;
+
+//    guiIo->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+//    guiIo->ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
+        io.ConfigFlags |= ImGuiCol_DockingEmptyBg;
 
         Application &app = Application::Get();
-//        ImGui_ImplGlfw_InitForOpenGL(app.GetWindow(), true);
+        auto *window = static_cast<GLFWwindow *>(app.GetWindow().GetNativeWindow());
+        ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 
     void ImGuiLayer::OnDetach() {
-        Layer::OnDetach();
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
     }
 
-    void ImGuiLayer::OnUpdate() {
+    void ImGuiLayer::Begin() {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGui::DockSpaceOverViewport();
+    }
 
+    void ImGuiLayer::End() {
         ImGuiIO &io = ImGui::GetIO();
         Application &app = Application::Get();
         io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui::NewFrame();
-
-//        static bool show = true;
-        ImGui::ShowDemoWindow();
-
+        //render
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+            GLFWwindow *backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
+        }
     }
 
-    void ImGuiLayer::OnEvent(Event &event) {
-        Layer::OnEvent(event);
-    }
+    void ImGuiLayer::OnImGuiRender() {
+        ImGui::Begin("xxx");
 
-    bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent &e) {
-        return false;
-    }
 
-    bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent &e) {
-        return false;
-    }
-
-    bool ImGuiLayer::OnMouseMovedEvent(MouseMovedEvent &e) {
-        return false;
-    }
-
-    bool ImGuiLayer::OnMouseScrolledEvent(MouseScrolledEvent &e) {
-        return false;
-    }
-
-    bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent &e) {
-        return false;
-    }
-
-    bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent &e) {
-        return false;
-    }
-
-    bool ImGuiLayer::OnWindowResizedEvent(WindowResizeEvent &e) {
-        return false;
+        ImGui::End();
+//        static bool show = true;
+//        ImGui::ShowDemoWindow(&show);
     }
 
 } // Azur
