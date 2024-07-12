@@ -2,23 +2,23 @@
 #include <Azur.h>
 
 
-class ExampleLayer : public Azur::Layer {
+class ExampleLayer : public Azure::Layer {
 public:
     void OnUpdate() override {
 //        AZ_INFO("ExampleLayer::Layer");
     }
 
-    void OnEvent(Azur::Event &event) override {
+    void OnEvent(Azure::Event &event) override {
 
     }
 };
 
 int main() {
-    Azur::AzurLog::Init();
+    Azure::AzurLog::Init();
 
     AZ_CORE_INFO("Init Log");
 
-    auto *app = Azur::Application::CreateApp();
+    auto *app = Azure::Application::CreateApp();
 //    app->PushLayer(new ExampleLayer());
 //    app->PushOverlay(new Azur::ImGuiLayer());
     app->Run();

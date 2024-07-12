@@ -5,7 +5,7 @@
 #include "Azur/Core.h"
 #include "Azur/Events/Event.h"
 
-namespace Azur {
+namespace Azure {
     /**
      * 层
      */

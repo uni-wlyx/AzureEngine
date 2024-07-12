@@ -5,7 +5,7 @@
 #include "Azur/Events/Event.h"
 #include "Azur/Core/KeyCodes.h"
 
-namespace Azur {
+namespace Azure {
     class KeyEvent : public Event
     {
     public:

@@ -4,7 +4,7 @@
 
 #include <GLFW/glfw3.h>
 
-namespace Azur {
+namespace Azure {
     Input *Input::s_Instance = new WindowsInput();
 
     bool WindowsInput::IsKeyPressedImpl(int keycode) {

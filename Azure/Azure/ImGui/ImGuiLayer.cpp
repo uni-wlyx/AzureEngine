@@ -3,7 +3,7 @@
 #include "ImGuiLayer.h"
 #include "Azur/Core/Application.h"
 
-namespace Azur {
+namespace Azure {
     ImGuiLayer::ImGuiLayer() {
 
     }

@@ -2,7 +2,7 @@
 
 #include "AzurLog.h"
 
-namespace Azur {
+namespace Azure {
     std::shared_ptr<spdlog::logger> AzurLog::m_CoreLogger;
 
     std::shared_ptr<spdlog::logger>AzurLog::m_ClientLogger;

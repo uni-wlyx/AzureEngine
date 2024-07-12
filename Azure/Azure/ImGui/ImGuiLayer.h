@@ -11,7 +11,7 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-namespace Azur {
+namespace Azure {
 
     class AZUR_API ImGuiLayer : public Layer {
     public:

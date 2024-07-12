@@ -3,7 +3,7 @@
 #define MOUSECODES_H
 
 #include "azphc.h"
-namespace Azur{
+namespace Azure{
     using MouseCode = uint16_t;
 
     namespace Mouse

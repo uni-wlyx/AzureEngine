@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
 set(CMAKE_CXX_STANDARD 17)
-set(AZurLibeName Azur)
+set(AZurLibeName Azure)
 
 project(${AZurLibeName} VERSION 0.1.0)
 

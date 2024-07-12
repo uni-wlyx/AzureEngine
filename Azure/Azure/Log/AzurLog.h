@@ -7,7 +7,7 @@
 
 #include "Azur/Core.h"
 
-namespace Azur {
+namespace Azure {
     /**
      * 日志类，封装spdlog
      */
@@ -26,7 +26,7 @@ namespace Azur {
 }
 
 #define AZ_CORE_TRACE(...)   ::Azur::AzurLog::GetCoreLogger()->trace(__VA_ARGS__)
-#define AZ_CORE_INFO(...)    ::Azur::AzurLog::GetCoreLogger()->info(__VA_ARGS__)
+#define AZ_CORE_INFO(...)    ::Azure::AzurLog::GetCoreLogger()->info(__VA_ARGS__)
 #define AZ_CORE_WARN(...)    ::Azur::AzurLog::GetCoreLogger()->warn(__VA_ARGS__)
 #define AZ_CORE_ERROR(...)   ::Azur::AzurLog::GetCoreLogger()->error(__VA_ARGS__)
 //#define AZ_CORE_FATAL(...)   ::Azur::AzurLog::GetCoreLogger()->(__VA_ARGS__)

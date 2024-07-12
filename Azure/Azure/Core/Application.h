@@ -9,7 +9,7 @@
 
 #include "Azur/ImGui/ImGuiLayer.h"
 
-namespace Azur {
+namespace Azure {
     class AZUR_API Application {
     public:
         Application();

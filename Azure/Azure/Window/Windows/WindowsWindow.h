@@ -7,7 +7,7 @@
 
 #include "Azur/Window/Window.h"
 
-namespace Azur {
+namespace Azure {
 
     class WindowsWindow : public Window {
     public:

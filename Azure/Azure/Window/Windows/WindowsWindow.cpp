@@ -6,7 +6,7 @@
 #include "Azur/Events/MouseEvent.h"
 #include "WindowsInput.h"
 
-namespace Azur {
+namespace Azure {
 
     static bool s_GLFWInitialized = false;
 

@@ -1,7 +1,7 @@
 
 #include "LayerStack.h"
 
-namespace Azur {
+namespace Azure {
     LayerStack::LayerStack() {
 
     }

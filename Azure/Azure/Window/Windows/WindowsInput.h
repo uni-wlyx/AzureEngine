@@ -4,7 +4,7 @@
 
 #include "Azur/Core/Input.h"
 
-namespace Azur {
+namespace Azure {
 
     class WindowsInput : public Input {
     protected:

@@ -5,7 +5,7 @@
 #include "Azur/Events/Event.h"
 #include "Azur/Core/MouseCodes.h"
 
-namespace Azur{
+namespace Azure{
     class MouseMovedEvent : public Event
     {
     public:

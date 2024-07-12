@@ -4,7 +4,7 @@
 
 #include "Layer.h"
 
-namespace Azur {
+namespace Azure {
 
     class AZUR_API LayerStack {
     public:

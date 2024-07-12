@@ -4,7 +4,7 @@
 
 #include "azphc.h"
 
-namespace Azur{
+namespace Azure{
     using KeyCode = uint16_t;
 
     namespace Key

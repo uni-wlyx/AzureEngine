@@ -6,7 +6,7 @@
 #include "Azur/Core.h"
 #include "azphc.h"
 
-namespace Azur {
+namespace Azure {
 
     enum class EventType {
         None = 0,

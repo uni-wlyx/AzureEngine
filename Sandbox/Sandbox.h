@@ -4,7 +4,7 @@
 
 #include <Azur.h>
 
-class Sandbox : public Azur::Application {
+class Sandbox : public Azure::Application {
 public:
     Sandbox() {
 

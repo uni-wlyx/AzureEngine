@@ -4,7 +4,7 @@
 
 #include "Azur/Core.h"
 
-namespace Azur {
+namespace Azure {
     class Input {
     public:
         inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); };

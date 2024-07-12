@@ -3,7 +3,7 @@
 #include "Azur/Log/AzurLog.h"
 #include "Input.h"
 
-namespace Azur {
+namespace Azure {
     Application *Application::s_instance = nullptr;
 
     Application::Application() {
@@ -49,11 +49,11 @@ namespace Azur {
         overlay->OnAttach();
     }
 
-    Application *Azur::Application::CreateApp() {
+    Application *Azure::Application::CreateApp() {
         return new Application();
     }
 
-    void Application::OnEvent(Azur::Event &event) {
+    void Application::OnEvent(Azure::Event &event) {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<WindowCloseEvent>(AZ_BIND_EVENT(Application::OnWindowClose));
 
