@@ -6,7 +6,7 @@
 
 namespace Azure {
 
-    class AZUR_API LayerStack {
+    class AZURE_API LayerStack {
     public:
         LayerStack();
 
@@ -29,6 +29,6 @@ namespace Azure {
         unsigned int m_layerInsertIndex = 0;
     };
 
-} // Azur
+} // Azure
 
 #endif //LAYERSTACK_H

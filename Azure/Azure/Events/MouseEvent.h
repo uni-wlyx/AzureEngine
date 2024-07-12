@@ -2,8 +2,8 @@
 #ifndef MOUSEEVENT_H
 #define MOUSEEVENT_H
 
-#include "Azur/Events/Event.h"
-#include "Azur/Core/MouseCodes.h"
+#include "Azure/Events/Event.h"
+#include "Azure/Core/MouseCodes.h"
 
 namespace Azure{
     class MouseMovedEvent : public Event

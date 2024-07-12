@@ -1,6 +1,6 @@
 #include "azphc.h"
 #include "WindowsInput.h"
-#include "Azur/Core/Application.h"
+#include "Azure/Core/Application.h"
 
 #include <GLFW/glfw3.h>
 
@@ -39,4 +39,4 @@ namespace Azure {
         glfwGetCursorPos(Windows, &xpos, &ypos);
         return {(float) xpos, (float) ypos};
     }
-} // Azur
+} // Azure

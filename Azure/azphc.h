@@ -14,7 +14,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Azur/Log/AzurLog.h"
+#include "Azure/Log/AzureLog.h"
 
 #ifdef AZUR_PLATFORM_WINDOWS
 

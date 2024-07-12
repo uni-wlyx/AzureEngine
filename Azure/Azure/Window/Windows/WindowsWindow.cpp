@@ -1,9 +1,9 @@
 #include "azphc.h"
 #include "WindowsWindow.h"
 
-#include "Azur/Events/ApplicationEvent.h"
-#include "Azur/Events/KeyEvent.h"
-#include "Azur/Events/MouseEvent.h"
+#include "Azure/Events/ApplicationEvent.h"
+#include "Azure/Events/KeyEvent.h"
+#include "Azure/Events/MouseEvent.h"
 #include "WindowsInput.h"
 
 namespace Azure {

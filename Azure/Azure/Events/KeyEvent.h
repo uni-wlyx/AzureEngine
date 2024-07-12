@@ -2,8 +2,8 @@
 #ifndef KEYEVENT_H
 #define KEYEVENT_H
 
-#include "Azur/Events/Event.h"
-#include "Azur/Core/KeyCodes.h"
+#include "Azure/Events/Event.h"
+#include "Azure/Core/KeyCodes.h"
 
 namespace Azure {
     class KeyEvent : public Event

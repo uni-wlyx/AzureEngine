@@ -1,7 +1,7 @@
 #include <GLFW/glfw3.h>
 #include "azphc.h"
 #include "ImGuiLayer.h"
-#include "Azur/Core/Application.h"
+#include "Azure/Core/Application.h"
 
 namespace Azure {
     ImGuiLayer::ImGuiLayer() {
@@ -77,4 +77,4 @@ namespace Azure {
 //        ImGui::ShowDemoWindow(&show);
     }
 
-} // Azur
+} // Azure

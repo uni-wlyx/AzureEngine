@@ -2,7 +2,7 @@
 #ifndef SANDBOX_H
 #define SANDBOX_H
 
-#include <Azur.h>
+#include <Azure.h>
 
 class Sandbox : public Azure::Application {
 public:

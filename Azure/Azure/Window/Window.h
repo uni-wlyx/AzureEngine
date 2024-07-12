@@ -4,8 +4,8 @@
 
 #include "azphc.h"
 
-#include "Azur/Core.h"
-#include "Azur/Events/Event.h"
+#include "Azure/Core.h"
+#include "Azure/Events/Event.h"
 
 namespace Azure {
 
@@ -14,14 +14,14 @@ namespace Azure {
         unsigned int Width;
         unsigned int Height;
 
-        explicit WindowProps(const std::string &title = "Azur Engine", unsigned int width = 1280,
+        explicit WindowProps(const std::string &title = "Azure Engine", unsigned int width = 1280,
                              unsigned int height = 720)
                 : Title(title), Width(width), Height(height) {
 
         }
     };
 
-    class AZUR_API Window {
+    class AZURE_API Window {
     public:
         using EventCallbackFn = std::function<void(Event &)>;
 

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Azur.h>
+#include <Azure.h>
 
 
 class ExampleLayer : public Azure::Layer {
@@ -14,13 +14,13 @@ public:
 };
 
 int main() {
-    Azure::AzurLog::Init();
+    Azure::AzureLog::Init();
 
     AZ_CORE_INFO("Init Log");
 
     auto *app = Azure::Application::CreateApp();
 //    app->PushLayer(new ExampleLayer());
-//    app->PushOverlay(new Azur::ImGuiLayer());
+//    app->PushOverlay(new Azure::ImGuiLayer());
     app->Run();
     delete app;
 

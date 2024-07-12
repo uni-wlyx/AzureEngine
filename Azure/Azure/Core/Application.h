@@ -2,15 +2,15 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "Azur/Core.h"
-#include "Azur/Window/Window.h"
-#include "Azur/Events/ApplicationEvent.h"
-#include "Azur/Core/LayerStack.h"
+#include "Azure/Core.h"
+#include "Azure/Window/Window.h"
+#include "Azure/Events/ApplicationEvent.h"
+#include "Azure/Core/LayerStack.h"
 
-#include "Azur/ImGui/ImGuiLayer.h"
+#include "Azure/ImGui/ImGuiLayer.h"
 
 namespace Azure {
-    class AZUR_API Application {
+    class AZURE_API Application {
     public:
         Application();
 

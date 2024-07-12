@@ -5,7 +5,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "Azur/Window/Window.h"
+#include "Azure/Window/Window.h"
 
 namespace Azure {
 

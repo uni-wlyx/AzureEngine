@@ -2,14 +2,14 @@
 #ifndef LAYER_H
 #define LAYER_H
 
-#include "Azur/Core.h"
-#include "Azur/Events/Event.h"
+#include "Azure/Core.h"
+#include "Azure/Events/Event.h"
 
 namespace Azure {
     /**
      * 层
      */
-    class AZUR_API Layer {
+    class AZURE_API Layer {
     public:
         Layer() = default;
 

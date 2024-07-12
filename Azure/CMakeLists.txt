@@ -7,10 +7,10 @@ project(${AZurLibeName} VERSION 0.1.0)
 get_filename_component(PARENT_FOLDER_ABSOLUTE2 ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 file(GLOB_RECURSE LIBSOURCE "*.cpp" "*.h")
 
-include_directories(${AZUR_PATH})
+include_directories(${AZURE_PATH})
 
-#add_definitions(-DAZUR_PLATFORM_WINDOWS)
-add_definitions(-DAZUR_EXPORT)
+#add_definitions(-DAZURE_PLATFORM_WINDOWS)
+add_definitions(-DAZURE_EXPORT)
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DAZ_ENABLE_ASSERTS)
 endif ()

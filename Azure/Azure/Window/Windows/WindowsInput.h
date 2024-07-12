@@ -2,7 +2,7 @@
 #ifndef WINDOWSINPUT_H
 #define WINDOWSINPUT_H
 
-#include "Azur/Core/Input.h"
+#include "Azure/Core/Input.h"
 
 namespace Azure {
 
@@ -21,6 +21,6 @@ namespace Azure {
         float GetMouseYImpl() override;
     };
 
-} // Azur
+} // Azure
 
 #endif //WINDOWSINPUT_H

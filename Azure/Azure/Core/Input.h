@@ -2,7 +2,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "Azur/Core.h"
+#include "Azure/Core.h"
 
 namespace Azure {
     class Input {

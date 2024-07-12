@@ -1,11 +1,11 @@
 #ifndef CORE_H
 #define CORE_H
 
-#ifdef AZUR_PLATFORM_WINDOWS
-    #ifdef AZUR_EXPORT
-        #define AZUR_API __declspec(dllexport)
+#ifdef AZURE_PLATFORM_WINDOWS
+    #ifdef AZURE_EXPORT
+        #define AZURE_API __declspec(dllexport)
     #else
-        #define AZUR_API __declspec(dllimport)
+        #define AZURE_API __declspec(dllimport)
     #endif
 #endif
 

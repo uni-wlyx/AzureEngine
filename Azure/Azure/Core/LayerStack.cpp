@@ -36,4 +36,4 @@ namespace Azure {
             m_layers.erase(iter);
         }
     }
-} // Azur
+} // Azure

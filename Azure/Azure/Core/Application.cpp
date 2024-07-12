@@ -1,6 +1,6 @@
 
 #include "Application.h"
-#include "Azur/Log/AzurLog.h"
+#include "Azure/Log/AzureLog.h"
 #include "Input.h"
 
 namespace Azure {

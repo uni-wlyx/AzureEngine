@@ -2,10 +2,10 @@
 #ifndef IMGUILAYER_H
 #define IMGUILAYER_H
 
-#include "Azur/Core/Layer.h"
-#include "Azur/Events/MouseEvent.h"
-#include "Azur/Events/KeyEvent.h"
-#include "Azur/Events/ApplicationEvent.h"
+#include "Azure/Core/Layer.h"
+#include "Azure/Events/MouseEvent.h"
+#include "Azure/Events/KeyEvent.h"
+#include "Azure/Events/ApplicationEvent.h"
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -13,7 +13,7 @@
 
 namespace Azure {
 
-    class AZUR_API ImGuiLayer : public Layer {
+    class AZURE_API ImGuiLayer : public Layer {
     public:
         ImGuiLayer();
         ~ImGuiLayer();
@@ -29,6 +29,6 @@ namespace Azure {
         float m_time = 0.0f;
     };
 
-} // Azur
+} // Azure
 
 #endif //IMGUILAYER_H
