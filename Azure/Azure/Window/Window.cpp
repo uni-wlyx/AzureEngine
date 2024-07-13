@@ -8,9 +8,9 @@
 #endif
 
 namespace Azure {
-    Scope <Window> Window::Create(const Azure::WindowProps &props) {
+    Scope <Window> Window::Create() {
     #ifdef AZURE_PLATFORM_WINDOWS
-        return CreateScope<WindowsWindow>(props);
+        return CreateScope<WindowsWindow>();
     #else
         AZ_CORE_ASSERT(false,"Unknown platform");
         return nullptr;

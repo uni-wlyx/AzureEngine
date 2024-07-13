@@ -35,7 +35,11 @@ namespace Azure {
 
         virtual void SetEventCallback(const EventCallbackFn &callback) = 0;
 
-        static Scope<Window> Create(const WindowProps &props = WindowProps());
+        virtual void Init(const WindowProps &props = WindowProps()) = 0;
+
+        virtual void ShutDown() = 0;
+
+        static Scope<Window> Create();
 
         virtual void *GetNativeWindow() const = 0;
     };

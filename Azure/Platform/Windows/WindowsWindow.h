@@ -12,7 +12,7 @@ namespace Azure {
 
     class WindowsWindow : public Window {
     public:
-        explicit WindowsWindow(const WindowProps &props);
+        explicit WindowsWindow();
 
         ~WindowsWindow() override;
 
@@ -26,10 +26,10 @@ namespace Azure {
 
         void * GetNativeWindow() const override;
 
-    private:
-        virtual void Init(const WindowProps &props);
+    // private:
+        virtual void Init(const WindowProps &props = WindowProps()) override;
 
-        virtual void ShutDown();
+        virtual void ShutDown() override;
 
     private:
         GLFWwindow *m_window;

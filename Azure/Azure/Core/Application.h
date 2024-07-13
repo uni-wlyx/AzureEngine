@@ -42,6 +42,8 @@ namespace Azure {
 
     private:
         static Application *s_instance;
+
+        uint32_t m_VertexArray,m_VertexBuffer,m_IndexBuffer;
     };
 
 }

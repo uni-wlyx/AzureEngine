@@ -1,10 +1,8 @@
-
 #ifndef EVENT_H
 #define EVENT_H
 
 #include <functional>
 #include "Azure/Core.h"
-#include "azphc.h"
 
 namespace Azure {
 

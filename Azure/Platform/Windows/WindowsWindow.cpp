@@ -19,12 +19,12 @@ namespace Azure {
 //    }
 
 
-    WindowsWindow::WindowsWindow(const WindowProps &props) {
-        Init(props);
+    WindowsWindow::WindowsWindow() {
+        // Init(props);
     }
 
     WindowsWindow::~WindowsWindow() {
-        ShutDown();
+        // ShutDown();
     }
 
     void WindowsWindow::OnUpdate() {
