@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.26)
 project(AzureEngine)
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_TOOLCHAIN_FILE )
+
 #添加预编译宏
 IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
     MESSAGE( "current platform: Linux ")
@@ -36,4 +38,4 @@ add_subdirectory(${AZURE_PATH})
 add_subdirectory(${Sandbox_PATH})
 
 
-message(${CMAKE_BUILD_TYPE})
+# message(${CMAKE_BUILD_TYPE})

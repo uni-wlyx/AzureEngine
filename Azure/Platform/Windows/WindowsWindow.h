@@ -2,10 +2,11 @@
 #ifndef WINDOWSWINDOW_H
 #define WINDOWSWINDOW_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include "Azure/Window/Window.h"
+#include "Azure/Renderer/GraphicsContext.h"
+
+#include <GLFW/glfw3.h>
+//#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Azure {
 
@@ -32,6 +33,7 @@ namespace Azure {
 
     private:
         GLFWwindow *m_window;
+        GraphicsContext* m_context;
 
         struct WindowData {
             std::string Title;

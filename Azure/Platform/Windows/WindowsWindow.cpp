@@ -1,18 +1,22 @@
 #include "azphc.h"
+
 #include "WindowsWindow.h"
+#include "WindowsInput.h"
 
 #include "Azure/Events/ApplicationEvent.h"
 #include "Azure/Events/KeyEvent.h"
 #include "Azure/Events/MouseEvent.h"
-#include "WindowsInput.h"
+
+//#include "Platform/OpenGL/"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Azure {
 
     static bool s_GLFWInitialized = false;
 
-    Window *Window::Create(const WindowProps &props) {
-        return new WindowsWindow(props);
-    }
+//    Window *Window::Create(const WindowProps &props) {
+//        return new WindowsWindow(props);
+//    }
 
 
     WindowsWindow::WindowsWindow(const WindowProps &props) {
@@ -25,8 +29,7 @@ namespace Azure {
 
     void WindowsWindow::OnUpdate() {
         glfwPollEvents();
-        glfwSwapBuffers(m_window);
-
+        m_context->SwapBuffers();
     }
 
     void WindowsWindow::Init(const WindowProps &props) {
@@ -53,10 +56,8 @@ namespace Azure {
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         m_window = glfwCreateWindow((int) m_Data.Width, (int) m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
-        glfwMakeContextCurrent(m_window);
-
-        int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-        AZ_CORE_ASSERT(status, "Failed to initialize Glad");
+        m_context = new OpenGLContext(m_window);
+        m_context->Init();
 
         glfwSetWindowUserPointer(m_window, &m_Data);
         glfwSetWindowSizeCallback(m_window, [](GLFWwindow *window, int width, int height) {
@@ -113,7 +114,7 @@ namespace Azure {
                 }
             }
         });
-        
+
     }
 
     void WindowsWindow::ShutDown() {

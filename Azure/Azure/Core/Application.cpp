@@ -10,7 +10,7 @@ namespace Azure {
         AZ_CORE_ASSERT(!s_instance, "Application already exists");
         s_instance = this;
 
-        m_window = std::unique_ptr<Window>(Window::Create());
+        m_window = Window::Create();
         m_window->SetEventCallback(AZ_BIND_EVENT(Application::OnEvent));
 
         m_ImGuiLayer = new ImGuiLayer();

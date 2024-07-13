@@ -32,8 +32,8 @@ namespace Azure {
         static Application *CreateApp();
 
     private:
-        std::unique_ptr<Window> m_window;
-        ImGuiLayer* m_ImGuiLayer;
+        Scope <Window> m_window;
+        ImGuiLayer *m_ImGuiLayer;
         LayerStack m_layerStack;
 
         bool m_running = true;
