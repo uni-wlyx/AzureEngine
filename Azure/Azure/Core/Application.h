@@ -9,6 +9,8 @@
 
 #include "Azure/ImGui/ImGuiLayer.h"
 
+#include "Azure/Renderer/Shader.h"
+
 namespace Azure {
     class AZURE_API Application {
     public:
@@ -44,6 +46,7 @@ namespace Azure {
         static Application *s_instance;
 
         uint32_t m_VertexArray,m_VertexBuffer,m_IndexBuffer;
+        Scope<Shader> m_shader;
     };
 
 }
