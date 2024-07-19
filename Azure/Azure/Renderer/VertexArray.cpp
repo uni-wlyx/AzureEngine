@@ -6,11 +6,11 @@
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace Azure{
-    VertexArray *VertexArray::Create()
+    Ref<VertexArray> VertexArray::Create()
     {
         switch (Renderer::GetAPI())
         {
-        case RendererAPI::API::OpenGL:  return new OpenGLVertexArray ();
+        case RendererAPI::API::OpenGL:  return  CreateRef<OpenGLVertexArray> ();
         case RendererAPI::API::None:    AZ_ASSERT(false, "No Renderer API!!!");return nullptr;
         }
 

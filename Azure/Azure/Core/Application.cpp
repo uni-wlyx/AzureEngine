@@ -27,49 +27,45 @@ namespace Azure
         PushOverlay(m_ImGuiLayer);
 
 
+        m_vertexArray = VertexArray::Create();
 
-        glGenVertexArrays(1, &m_VertexArray);
-        glBindVertexArray(m_VertexArray);
+        float vertices[6 * 3] = {
+            -0.5f, -0.5f, 0.0f,0.6f,0.34f,0.67f,
+            0.5f, -0.5f, 0.0f,0.38f,0.85f,0.75f,
+            0.0f, 0.5f, 0.0f,0.44f,0.66f,0.28f};
 
-        glGenBuffers(1, &m_VertexBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+        Ref<VertexBuffer> vb = VertexBuffer::Create(vertices, sizeof(vertices));
+        vb->SetLayout({
+            {EShaderDataType::Float3, "a_Postion"},
+            {EShaderDataType::Float3, "a_Color"}
+        });
 
-        float vertices[3 * 3] = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f};
-
-        m_vertexArray = CreateRef<VertexArray>();
-        Ref<VertexBuffer> vb = CreateRef<VertexBuffer>(vertices,sizeof(vertices));
-        
-
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-
-        glGenBuffers(1, &m_IndexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
+        m_vertexArray->AddVertexBuffer(vb);
 
         uint32_t indices[3] = {0, 1, 2};
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        Ref<IndexBuffer> ib = IndexBuffer::Create(indices, sizeof(indices));
+
+        m_vertexArray->SetIndexBuffer(ib);
 
         std::string vertexSrc = "#version 330 core\n"
                                 "layout (location = 0) in vec3 aPos;\n"
+                                "layout (location = 1) in vec3 aColor;\n"
+                                "out vec3 vColor;\n"
                                 "void main()\n"
                                 "{\n"
+                                "vColor = aColor;"
                                 "gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
                                 "}\n";
 
         std::string fragmentSrc = "#version 330 core\n"
                                   "out vec4 FragColor;\n"
+                                  "in vec3 vColor;\n"
                                   "void main()\n"
                                   "{\n"
-                                  "FragColor = vec4(1.0f,0.5f,0.2f,1.0f);\n"
+                                  "FragColor = vec4(vColor,1.0f);\n"
                                   "}\n";
 
-        m_shader = std::make_unique<Shader>(vertexSrc,fragmentSrc);
-        // m_shader->
+        m_shader = CreateRef<Shader>(vertexSrc, fragmentSrc);
     }
 
     Application::~Application()
@@ -85,15 +81,11 @@ namespace Azure
 
             Renderer::BeginScene();
 
-            // Renderer::Submit(m_VertexArray);
+            Renderer::Submit(m_shader,m_vertexArray);
 
-            Renderer::EndScene();   
+            Renderer::EndScene();
 
-            m_shader->Bind();
-            glBindVertexArray(m_VertexArray);
-            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
-            m_shader->UnBind();
-
+          
             for (Layer *layer : m_layerStack)
             {
                 layer->OnUpdate();

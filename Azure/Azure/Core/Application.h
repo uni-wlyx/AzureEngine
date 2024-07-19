@@ -51,7 +51,7 @@ namespace Azure {
 
         Ref<VertexArray> m_vertexArray;
 
-        Scope<Shader> m_shader;
+        Ref<Shader> m_shader;
     };
 
 }
