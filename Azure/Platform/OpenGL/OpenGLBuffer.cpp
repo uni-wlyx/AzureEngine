@@ -1,4 +1,4 @@
-#include <azphc.h>
+#include "azphc.h"
 #include "OpenGLBuffer.h"
 
 #include <glad/glad.h>

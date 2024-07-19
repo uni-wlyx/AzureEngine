@@ -10,11 +10,8 @@ namespace Azure
     {
         switch (Renderer::GetAPI())
         {
-        case ERendererAPI::OpenGL:
-            return new OpenGLVertexBuffer(vertices, size);
-        case ERendererAPI::None:
-            AZ_ASSERT(false, "No Renderer API!!!");
-            return nullptr;
+        case RendererAPI::API::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
+        case RendererAPI::API::None:    AZ_ASSERT(false, "No Renderer API!!!");return nullptr;
         }
 
         AZ_ASSERT(false, "UnKonwn Renderer API!!!");
@@ -25,11 +22,8 @@ namespace Azure
     {
         switch (Renderer::GetAPI())
         {
-        case ERendererAPI::OpenGL:
-            return new OpenGLIndexBuffer(indices, count);
-        case ERendererAPI::None:
-            AZ_ASSERT(false, "No Renderer API!!!");
-            return nullptr;
+        case RendererAPI::API::OpenGL:  return new OpenGLIndexBuffer(indices, count);
+        case RendererAPI::API::None:    AZ_ASSERT(false, "No Renderer API!!!");return nullptr;
         }
 
         AZ_ASSERT(false, "UnKonwn Renderer API!!!");

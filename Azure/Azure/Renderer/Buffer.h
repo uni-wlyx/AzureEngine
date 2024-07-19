@@ -64,8 +64,8 @@ namespace Azure
 				case EShaderDataType::Float2:  return 2;
 				case EShaderDataType::Float3:  return 3;
 				case EShaderDataType::Float4:  return 4;
-				case EShaderDataType::Mat3:    return 3 * 3; // 3* float3
-				case EShaderDataType::Mat4:    return 4 * 4; // 4* float4
+				case EShaderDataType::Mat3:    return 3; // 3* float3
+				case EShaderDataType::Mat4:    return 4; // 4* float4
 				case EShaderDataType::Int:     return 1;
 				case EShaderDataType::Int2:    return 2;
 				case EShaderDataType::Int3:    return 3;

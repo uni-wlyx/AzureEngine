@@ -2,7 +2,12 @@
 #include "Application.h"
 #include "Azure/Log/AzureLog.h"
 #include "Input.h"
+
 #include <glad/glad.h>
+
+#include "Azure/Renderer/RenderCommand.h"
+#include "Azure/Renderer/Renderer.h"
+#include "Azure/Renderer/Buffer.h"
 
 namespace Azure
 {
@@ -21,6 +26,8 @@ namespace Azure
         // stack会自动管理指针
         PushOverlay(m_ImGuiLayer);
 
+
+
         glGenVertexArrays(1, &m_VertexArray);
         glBindVertexArray(m_VertexArray);
 
@@ -31,6 +38,10 @@ namespace Azure
             -0.5f, -0.5f, 0.0f,
             0.5f, -0.5f, 0.0f,
             0.0f, 0.5f, 0.0f};
+
+        m_vertexArray = CreateRef<VertexArray>();
+        Ref<VertexBuffer> vb = CreateRef<VertexBuffer>(vertices,sizeof(vertices));
+        
 
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
@@ -69,8 +80,14 @@ namespace Azure
     {
         while (m_running)
         {
-            glClearColor(0.1f, 0.1f, 0.1f, 1);
-            glClear(GL_COLOR_BUFFER_BIT);
+            RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+            RenderCommand::Clear();
+
+            Renderer::BeginScene();
+
+            // Renderer::Submit(m_VertexArray);
+
+            Renderer::EndScene();   
 
             m_shader->Bind();
             glBindVertexArray(m_VertexArray);

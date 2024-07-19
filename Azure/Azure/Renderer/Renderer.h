@@ -3,21 +3,21 @@
 
 #pragma once
 
+#include "RenderCommand.h"
+#include "RendererAPI.h"
+#include "Shader.h"
+
 namespace Azure
 {
-    enum class ERendererAPI
-    {
-        None = 0,
-        OpenGL
-    };
-
     class Renderer
     {
     public:
-        inline static ERendererAPI GetAPI() { return s_RenderAPI; };
+        static void BeginScene();
+        static void EndScene();
 
-    private:
-        static ERendererAPI s_RenderAPI;
+        static void Submit(const Ref<Shader> &shader, const Ref<VertexArray> &vertexArray);
+
+        static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); };
     };
 } // namespace Azure
 

@@ -12,28 +12,9 @@
 #include "Azure/Renderer/Shader.h"
 #include "Azure/Renderer/Buffer.h"
 
+#include "Azure/Renderer/VertexArray.h"
 
 namespace Azure {
-
-    // static GLenum ShaderDataTypeToOpenGLBaseType(EShaderDataType type)
-    // {
-    //     switch (type)
-    //     {
-    //         case EShaderDataType::Float:    return GL_FLOAT;
-    //         case EShaderDataType::Float2:    return GL_FLOAT;
-    //         case EShaderDataType::Float3:    return GL_FLOAT;
-    //         case EShaderDataType::Float4:    return GL_FLOAT;
-    //         case EShaderDataType::Mat3:    return GL_FLOAT;
-    //         case EShaderDataType::Mat4:    return GL_FLOAT;
-    //         case EShaderDataType::Int:    return GL_INT;
-    //         case EShaderDataType::Int2:    return GL_INT;
-    //         case EShaderDataType::Int3:    return GL_INT;
-    //         case EShaderDataType::Int4:    return GL_INT;
-    //         case EShaderDataType::Bool:    return GL_BOOL;
-    //     }
-    //     AZ_CORE_ASSERT(false, "Unknown ShaderDataType!");
-    //     return 0;
-    // };
 
     class AZURE_API Application {
     public:
@@ -68,7 +49,8 @@ namespace Azure {
     private:
         static Application *s_instance;
 
-        uint32_t m_VertexArray,m_VertexBuffer,m_IndexBuffer;
+        Ref<VertexArray> m_vertexArray;
+
         Scope<Shader> m_shader;
     };
 
