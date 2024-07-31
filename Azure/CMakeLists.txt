@@ -18,6 +18,6 @@ endif ()
 
 add_library(${AZurLibeName} SHARED ${LIBSOURCE})
 
-target_precompile_headers(${AZurLibeName} PRIVATE azphc.h)
+target_precompile_headers(${AZurLibeName} PRIVATE azpch.h)
 #target_include_directories(${AZurLibeName} PRIVATE  "${CMAKE_CURRENT_LIST_DIR}/source")
 target_link_libraries(${AZurLibeName} PRIVATE ${LINK_LIB})

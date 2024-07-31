@@ -1,6 +1,6 @@
 
-#ifndef AZPHC_H
-#define AZPHC_H
+#ifndef AZPCH_H
+#define AZPCH_H
 
 #include <iostream>
 #include <memory>
@@ -23,4 +23,4 @@
 #endif
 
 
-#endif //AZPHC_H
+#endif //AZPCH_H
