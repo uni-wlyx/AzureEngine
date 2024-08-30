@@ -20,4 +20,8 @@ namespace Azure
 
         glDrawElements(GL_TRIANGLES,vertexArray->GetIndexBuffer()->GetCount(),GL_UNSIGNED_INT, nullptr);
     }
+    void OpenGLRendererAPI::ResizeViewport(int width, int height)
+    {
+        glViewport(0,0,width,height);
+    }
 }

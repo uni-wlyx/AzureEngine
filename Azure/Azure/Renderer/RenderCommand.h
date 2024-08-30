@@ -23,6 +23,11 @@ namespace Azure
         {
             s_RendererAPI->Clear();
         }
+        
+        static void ResizeViewport(int width, int height)
+        {
+            s_RendererAPI->ResizeViewport(width, height);
+        }
 
     private:
         static Scope<RendererAPI> s_RendererAPI;

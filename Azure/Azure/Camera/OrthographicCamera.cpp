@@ -13,11 +13,10 @@ namespace Azure
         m_worldUp = up;
         m_yaw = yaw;
         m_pitch = pitch;
+        
         m_viewMatrix = glm::mat4(1.0f);
-
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_position) *
 			glm::rotate(glm::mat4(1.0f), glm::radians(m_roll), glm::vec3(0, 0, 1));
-
 		m_viewMatrix = glm::inverse(transform);
 
         // UpDateViewMatrix();

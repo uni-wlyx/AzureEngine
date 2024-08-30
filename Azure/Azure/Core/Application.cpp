@@ -31,12 +31,29 @@ namespace Azure
 
         m_vertexArray = VertexArray::Create();
 
+        float len2 = 0.5;
+        float wid2 = 0.5;
+        float hei2 = 0.5;
+
+        float vertexs[] = {
+                len2, hei2, -wid2,0.6f,0.34f,0.67f,
+                -len2, hei2, -wid2,0.38f,0.85f,0.75f,
+                -len2, hei2, wid2,0.44f,0.66f,0.28f,
+                len2, hei2, wid2,0.6f,0.34f,0.67f,
+
+                len2, -hei2, -wid2,0.38f,0.85f,0.75f,
+                -len2, -hei2, -wid2,0.44f,0.66f,0.28f,
+                -len2, -hei2, wid2,0.6f,0.34f,0.67f,
+                len2, -hei2, wid2,0.44f,0.66f,0.28f,
+
+        };
+
         float vertices[6 * 3] = {
             -0.5f, -0.5f, 0.0f,0.6f,0.34f,0.67f,
             0.5f, -0.5f, 0.0f,0.38f,0.85f,0.75f,
             0.0f, 0.5f, 0.0f,0.44f,0.66f,0.28f};
 
-        Ref<VertexBuffer> vb = VertexBuffer::Create(vertices, sizeof(vertices));
+        Ref<VertexBuffer> vb = VertexBuffer::Create(vertexs, sizeof(vertexs));
         vb->SetLayout({
             {EShaderDataType::Float3, "a_Postion"},
             {EShaderDataType::Float3, "a_Color"}
@@ -44,7 +61,28 @@ namespace Azure
 
         m_vertexArray->AddVertexBuffer(vb);
 
-        uint32_t indices[3] = {0, 1, 2};
+        // uint32_t indices[3] = {0, 1, 2};
+
+        uint32_t indices[] = {
+                    0, 1, 2,
+                    0, 2, 3,
+
+                    0, 4, 7,
+                    0, 7, 3,
+
+                    3, 7, 6,
+                    3, 6, 2,
+
+                    1, 5, 6,
+                    1, 6, 2,
+
+                    0, 4, 5,
+                    0, 1, 5,
+
+                    4, 7, 5,
+                    5, 6, 7,
+            };
+
         Ref<IndexBuffer> ib = IndexBuffer::Create(indices, sizeof(indices));
 
         m_vertexArray->SetIndexBuffer(ib);
@@ -71,6 +109,8 @@ namespace Azure
         m_shader = CreateRef<Shader>(vertexSrc, fragmentSrc);
 
         m_camera = OrthographicCamera({0,0,0});
+        m_camera.SetPosition({0,0.5,0});
+        m_camera.SetRotation({-45,-45,0});
     }
 
     Application::~Application()
@@ -129,6 +169,7 @@ namespace Azure
     {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<WindowCloseEvent>(AZ_BIND_EVENT(Application::OnWindowClose));
+        dispatcher.Dispatch<WindowResizeEvent>(AZ_BIND_EVENT(Application::OnWindowResize));
 
         for (auto iter = m_layerStack.end(); iter != m_layerStack.begin();)
         {
@@ -146,4 +187,9 @@ namespace Azure
         return true;
     }
 
+    bool Application::OnWindowResize(WindowResizeEvent &e)
+    {
+        RenderCommand::ResizeViewport(e.GetWidth(), e.GetHeight());
+        return true;
+    }
 }

@@ -22,6 +22,8 @@ namespace Azure
 
         virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) = 0;        
 
+        virtual void ResizeViewport(int width, int height) = 0;
+
         static API GetAPI() { return s_API; }
         static Scope<RendererAPI> Create();
     private:

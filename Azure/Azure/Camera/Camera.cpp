@@ -5,6 +5,16 @@
 
 namespace Azure
 {
+    Camera Camera::CreateOrthographic(glm::vec3 pos, glm::vec3 up, float yaw, float pitch, float left, float right, float bottom, float top, float zNear, float zFar)
+    {
+        return Camera();
+    }
+
+    Camera Camera::CreatePerspective(glm::vec3 pos, glm::vec3 up, float yaw, float pitch, float fov, float aspect, float zfar)
+    {
+        return Camera();
+    }
+
     void Camera::UpDateViewMatrix()
     {
         glm::vec3 front;

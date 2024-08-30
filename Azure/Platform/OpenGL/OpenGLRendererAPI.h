@@ -14,6 +14,7 @@ namespace Azure
         virtual void Clear() override;
 
         virtual void DrawIndexed(const Ref<VertexArray> &vertexArray) override;
+        virtual void ResizeViewport(int width, int height) override;
 
     private:
     };

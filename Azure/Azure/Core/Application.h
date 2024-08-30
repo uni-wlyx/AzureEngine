@@ -49,6 +49,8 @@ namespace Azure {
 
         bool OnWindowClose(WindowCloseEvent &e);
 
+        bool OnWindowResize(WindowResizeEvent &e);
+
     private:
         static Application *s_instance;
 
