@@ -2,9 +2,14 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-namespace Azure {
+#include <glm/glm.hpp>
 
-    class Shader {
+
+namespace Azure
+{
+
+    class Shader
+    {
     public:
         Shader(const std::string &vertexSrc, const std::string &fragmentSrc);
 
@@ -14,10 +19,12 @@ namespace Azure {
 
         virtual void UnBind() const;
 
+        void UploadUniformMat4(const std::string &name, const glm::mat4 &matrix);
+
     private:
         uint32_t m_RendererID;
     };
 
 } // Azure
 
-#endif //SHADER_H
+#endif // SHADER_H

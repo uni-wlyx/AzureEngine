@@ -2,9 +2,12 @@
 #include "Shader.h"
 
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
-namespace Azure {
-    Shader::Shader(const std::string &vertexSrc, const std::string &fragmentSrc) {
+namespace Azure
+{
+    Shader::Shader(const std::string &vertexSrc, const std::string &fragmentSrc)
+    {
         GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
         const GLchar *source = vertexSrc.c_str();
@@ -14,7 +17,8 @@ namespace Azure {
 
         GLint isCompiled = 0;
         glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
-        if (isCompiled == GL_FALSE) {
+        if (isCompiled == GL_FALSE)
+        {
             GLint maxLength = 0;
             glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
 
@@ -35,7 +39,8 @@ namespace Azure {
         glCompileShader(fragmentShader);
 
         glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-        if (isCompiled == GL_FALSE) {
+        if (isCompiled == GL_FALSE)
+        {
             GLint maxLength = 0;
             glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
 
@@ -49,7 +54,7 @@ namespace Azure {
             return;
         }
 
-       m_RendererID = glCreateProgram();
+        m_RendererID = glCreateProgram();
 
         glAttachShader(m_RendererID, vertexShader);
         glAttachShader(m_RendererID, fragmentShader);
@@ -57,7 +62,8 @@ namespace Azure {
         glLinkProgram(m_RendererID);
         GLint isLinked = 0;
         glGetProgramiv(m_RendererID, GL_LINK_STATUS, &isLinked);
-        if (isLinked == GL_FALSE) {
+        if (isLinked == GL_FALSE)
+        {
             GLint maxLength = 0;
             glGetProgramiv(m_RendererID, GL_INFO_LOG_LENGTH, &maxLength);
 
@@ -73,19 +79,27 @@ namespace Azure {
             return;
         }
 
-        glDetachShader(m_RendererID,vertexShader);
-        glDetachShader(m_RendererID,fragmentShader);
+        glDetachShader(m_RendererID, vertexShader);
+        glDetachShader(m_RendererID, fragmentShader);
     }
 
-    Shader::~Shader() {
+    Shader::~Shader()
+    {
         glDeleteProgram(m_RendererID);
     }
 
-    void Shader::Bind() const {
+    void Shader::Bind() const
+    {
         glUseProgram(m_RendererID);
     }
 
-    void Shader::UnBind() const {
+    void Shader::UnBind() const
+    {
         glUseProgram(0);
+    }
+    void Shader::UploadUniformMat4(const std::string &name, const glm::mat4 &matrix)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
     }
 } // Azure

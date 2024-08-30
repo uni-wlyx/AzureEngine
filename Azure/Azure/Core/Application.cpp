@@ -9,6 +9,8 @@
 #include "Azure/Renderer/Renderer.h"
 #include "Azure/Renderer/Buffer.h"
 
+#include "Azure/Camera/Camera.h"
+
 namespace Azure
 {
     Application *Application::s_instance = nullptr;
@@ -50,11 +52,12 @@ namespace Azure
         std::string vertexSrc = "#version 330 core\n"
                                 "layout (location = 0) in vec3 aPos;\n"
                                 "layout (location = 1) in vec3 aColor;\n"
+                                "uniform mat4 u_ViewProjection;\n"
                                 "out vec3 vColor;\n"
                                 "void main()\n"
                                 "{\n"
                                 "vColor = aColor;"
-                                "gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+                                "gl_Position = u_ViewProjection * vec4(aPos.x, aPos.y, aPos.z, 1.0) ;\n"
                                 "}\n";
 
         std::string fragmentSrc = "#version 330 core\n"
@@ -66,6 +69,8 @@ namespace Azure
                                   "}\n";
 
         m_shader = CreateRef<Shader>(vertexSrc, fragmentSrc);
+
+        m_camera = OrthographicCamera({0,0,0});
     }
 
     Application::~Application()
@@ -79,7 +84,7 @@ namespace Azure
             RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
             RenderCommand::Clear();
 
-            Renderer::BeginScene();
+            Renderer::BeginScene(m_camera);
 
             Renderer::Submit(m_shader,m_vertexArray);
 

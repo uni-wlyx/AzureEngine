@@ -14,6 +14,8 @@
 
 #include "Azure/Renderer/VertexArray.h"
 
+#include "Azure/Camera/OrthographicCamera.h"
+
 namespace Azure {
 
     class AZURE_API Application {
@@ -41,6 +43,7 @@ namespace Azure {
         Scope <Window> m_window;
         ImGuiLayer *m_ImGuiLayer;
         LayerStack m_layerStack;
+        OrthographicCamera m_camera;
 
         bool m_running = true;
 
