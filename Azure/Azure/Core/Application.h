@@ -43,7 +43,7 @@ namespace Azure {
         Scope <Window> m_window;
         ImGuiLayer *m_ImGuiLayer;
         LayerStack m_layerStack;
-        OrthographicCamera m_camera;
+        Camera m_camera;
 
         bool m_running = true;
 

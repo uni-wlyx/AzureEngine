@@ -108,9 +108,9 @@ namespace Azure
 
         m_shader = CreateRef<Shader>(vertexSrc, fragmentSrc);
 
-        m_camera = OrthographicCamera({0,0,0});
-        m_camera.SetPosition({0,0.5,0});
-        m_camera.SetRotation({-45,-45,0});
+        m_camera = Camera::CreatePerspective();
+        m_camera.SetPosition({0,-0.5,0});
+        m_camera.SetRotation({-45,0,0});
     }
 
     Application::~Application()
