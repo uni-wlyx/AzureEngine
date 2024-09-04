@@ -7,7 +7,7 @@
 
 namespace Azure
 {
-    class VertexArray
+    class AZURE_API VertexArray
     {
     public:
         virtual ~VertexArray() = default;

@@ -10,7 +10,7 @@
 
 namespace Azure
 {
-    class Renderer
+    class AZURE_API Renderer
     {
     public:
         static void BeginScene(Camera &camera);

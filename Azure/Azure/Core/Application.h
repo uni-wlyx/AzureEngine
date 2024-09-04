@@ -9,13 +9,6 @@
 
 #include "Azure/ImGui/ImGuiLayer.h"
 
-#include "Azure/Renderer/Shader.h"
-#include "Azure/Renderer/Buffer.h"
-
-#include "Azure/Renderer/VertexArray.h"
-
-#include "Azure/Camera/OrthographicCamera.h"
-
 namespace Azure {
 
     class AZURE_API Application {
@@ -43,7 +36,6 @@ namespace Azure {
         Scope <Window> m_window;
         ImGuiLayer *m_ImGuiLayer;
         LayerStack m_layerStack;
-        Camera m_camera;
 
         bool m_running = true;
 
@@ -53,10 +45,6 @@ namespace Azure {
 
     private:
         static Application *s_instance;
-
-        Ref<VertexArray> m_vertexArray;
-
-        Ref<Shader> m_shader;
     };
 
 }

@@ -78,7 +78,7 @@ namespace Azure
 		}
     };
 
-    class BufferLayout
+    class AZURE_API BufferLayout
     {
     public:
         BufferLayout() =default;
@@ -115,7 +115,7 @@ namespace Azure
 
     };
 
-    class VertexBuffer
+    class AZURE_API VertexBuffer
     {
     public:
         virtual ~VertexBuffer() = default;
@@ -129,7 +129,7 @@ namespace Azure
         static Ref<VertexBuffer> Create(float *vertices, uint32_t size);
     };
 
-    class IndexBuffer
+    class AZURE_API IndexBuffer
     {
     public:
         virtual ~IndexBuffer() = default;

@@ -6,7 +6,7 @@
 #include "RendererAPI.h"
 namespace Azure
 {
-    class RenderCommand
+    class AZURE_API RenderCommand
     {
     public:
         static void DrawIndexed(const Ref<VertexArray> &vertexArray)
