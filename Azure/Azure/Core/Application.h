@@ -36,6 +36,7 @@ namespace Azure {
         Scope <Window> m_window;
         ImGuiLayer *m_ImGuiLayer;
         LayerStack m_layerStack;
+        float m_lastUpdateTime = 0.0f;
 
         bool m_running = true;
 

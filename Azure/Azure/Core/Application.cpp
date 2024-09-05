@@ -11,6 +11,8 @@
 
 #include "Azure/Camera/Camera.h"
 
+#include "Azure/Core/Time.h"
+
 namespace Azure
 {
     Application *Application::s_instance = nullptr;
@@ -37,9 +39,13 @@ namespace Azure
     {
         while (m_running)
         {
+            float time = Time::GetTime();
+            float deltaTime = time - m_lastUpdateTime;
+            m_lastUpdateTime = time;
+
             for (Layer *layer : m_layerStack)
             {
-                layer->OnUpdate();
+                layer->OnUpdate(deltaTime);
             }
 
             m_ImGuiLayer->Begin();

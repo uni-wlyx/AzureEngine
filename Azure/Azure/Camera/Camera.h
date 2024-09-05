@@ -34,7 +34,7 @@ namespace Azure
 	    const glm::vec3& GetPosition() const { return m_position; }
 		void SetPosition(const glm::vec3& position) { m_position = position; UpDateViewMatrix(); }
 
-        const glm::vec3& GetRotation() const { return glm::vec3(m_pitch, m_roll, m_yaw); }
+        const glm::vec3 GetRotation() const { return glm::vec3(m_pitch, m_roll, m_yaw); }
         void SetRotation(const glm::vec3& rotation) { m_pitch = rotation.x; m_roll = rotation.y; m_yaw = rotation.z; UpDateViewMatrix(); }
 
 		const glm::mat4& GetProjectionMatrix() const { return m_projectionMatrix; }

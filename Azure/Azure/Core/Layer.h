@@ -21,7 +21,7 @@ namespace Azure {
 
         virtual void OnImGuiRender() {};
 
-        virtual void OnUpdate() {}
+        virtual void OnUpdate(float deltaTime) {}
 
         virtual void OnEvent(Event &event) {}
     };

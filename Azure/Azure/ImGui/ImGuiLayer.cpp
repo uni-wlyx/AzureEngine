@@ -69,8 +69,9 @@ namespace Azure {
     }
 
     void ImGuiLayer::OnImGuiRender() {
+        ImGuiIO &io = ImGui::GetIO();
         ImGui::Begin("xxx");
-
+        ImGui::Text("FPS:%.1f/%.3f ms", io.Framerate, 1000.0f / io.Framerate);
 
         ImGui::End();
 //        static bool show = true;

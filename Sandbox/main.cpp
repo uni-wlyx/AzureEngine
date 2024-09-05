@@ -77,7 +77,7 @@ public:
         m_camera.SetRotation({0, 30, 0});
     }
 
-    void OnUpdate() override
+    void OnUpdate(float deltaTime) override
     {
 
         Azure::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});

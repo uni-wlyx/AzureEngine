@@ -6,6 +6,8 @@
 #include "Azure/Core/Layer.h"
 #include "Azure/ImGui/ImGuiLayer.h"
 
+#include "Azure/Core/Time.h"
+
 #include "Azure/Core/Input.h"
 #include "Azure/Core/KeyCodes.h"
 #include "Azure/Core/MouseCodes.h"
