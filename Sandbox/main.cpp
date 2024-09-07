@@ -13,15 +13,55 @@ public:
         float hei2 = 0.5;
 
         float vertexs[] = {
-            len2,hei2,-wid2,0.6f,0.34f,0.67f,
-            -len2,hei2,-wid2,0.38f,0.85f,0.75f,
-            -len2,hei2,wid2,0.44f,0.66f,0.28f,
-            len2,hei2,wid2,0.6f,0.34f,0.67f,
+            len2,
+            hei2,
+            -wid2,
+            0.6f,
+            0.34f,
+            0.67f,
+            -len2,
+            hei2,
+            -wid2,
+            0.38f,
+            0.85f,
+            0.75f,
+            -len2,
+            hei2,
+            wid2,
+            0.44f,
+            0.66f,
+            0.28f,
+            len2,
+            hei2,
+            wid2,
+            0.6f,
+            0.34f,
+            0.67f,
 
-            len2,-hei2,-wid2,0.38f,0.85f,0.75f,
-            -len2,-hei2,-wid2,0.44f,0.66f,0.28f,
-            -len2,-hei2,wid2,0.6f,0.34f,0.67f,
-            len2,-hei2,wid2,0.44f,0.66f,0.28f,
+            len2,
+            -hei2,
+            -wid2,
+            0.38f,
+            0.85f,
+            0.75f,
+            -len2,
+            -hei2,
+            -wid2,
+            0.44f,
+            0.66f,
+            0.28f,
+            -len2,
+            -hei2,
+            wid2,
+            0.6f,
+            0.34f,
+            0.67f,
+            len2,
+            -hei2,
+            wid2,
+            0.44f,
+            0.66f,
+            0.28f,
 
         };
 
@@ -39,12 +79,42 @@ public:
         // uint32_t indices[3] = {0, 1, 2};
 
         uint32_t indices[] = {
-            0,1,2,0,2,3,
-            0,4,7,0,7,3,
-            3,7,6,3,6,2,
-            1,5,6,1,6,2,
-            0,4,5,0,1,5,
-            4,7,5,5,6,7,
+            0,
+            1,
+            2,
+            0,
+            2,
+            3,
+            0,
+            4,
+            7,
+            0,
+            7,
+            3,
+            3,
+            7,
+            6,
+            3,
+            6,
+            2,
+            1,
+            5,
+            6,
+            1,
+            6,
+            2,
+            0,
+            4,
+            5,
+            0,
+            1,
+            5,
+            4,
+            7,
+            5,
+            5,
+            6,
+            7,
         };
 
         Azure::Ref<Azure::IndexBuffer> ib = Azure::IndexBuffer::Create(indices, sizeof(indices));
@@ -54,12 +124,14 @@ public:
         std::string vertexSrc = "#version 330 core\n"
                                 "layout (location = 0) in vec3 aPos;\n"
                                 "layout (location = 1) in vec3 aColor;\n"
+
+                                "uniform mat4 u_Transform;;\n"
                                 "uniform mat4 u_ViewProjection;\n"
                                 "out vec3 vColor;\n"
                                 "void main()\n"
                                 "{\n"
                                 "vColor = aColor;"
-                                "gl_Position = u_ViewProjection * vec4(aPos.x, aPos.y, aPos.z, 1.0) ;\n"
+                                "gl_Position = u_ViewProjection * u_Transform * vec4(aPos.x, aPos.y, aPos.z, 1.0) ;\n"
                                 "}\n";
 
         std::string fragmentSrc = "#version 330 core\n"
@@ -74,11 +146,16 @@ public:
 
         m_camera = Azure::Camera::CreateOrthographic();
         m_camera.SetPosition({0, 0, 0});
-        m_camera.SetRotation({0, 30, 0});
+        m_camera.SetRotation({0, 0, 0});
     }
+
+    float spp = 0;
 
     void OnUpdate(float deltaTime) override
     {
+
+        spp++;
+        // m_camera.SetRotation({0,0, spp});
 
         Azure::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         Azure::RenderCommand::Clear();
@@ -90,6 +167,29 @@ public:
         Azure::Renderer::EndScene();
     }
 
+    virtual void OnImGuiRender() override
+    {
+      
+
+        ImGui::Begin("xxx");
+        // ImGui::Text("FPS:%.1f/%.3f ms", io.Framerate, 1000.0f / io.Framerate);
+        ImGui::Text("12321");
+        ImGui::End();
+
+        // ImGui::ShowDemoWindow();
+        // ImGui::Begin("qwewq");
+        // // if (ImGui::Button("o"))
+        // // {
+        // //     m_camera.SetCameraType(Azure::ECameraType::Orthographic);
+        // // }
+        // // if (ImGui::Button("p"))
+        // // {
+        // //     m_camera.SetCameraType(Azure::ECameraType::Perspective);
+        // // }
+
+        // ImGui::End();
+    };
+
     void OnEvent(Azure::Event &event) override
     {
     }
@@ -100,6 +200,8 @@ private:
     Azure::Ref<Azure::Shader> m_shader;
 };
 
+// class 
+
 int main()
 {
     Azure::AzureLog::Init();
@@ -107,7 +209,7 @@ int main()
     AZ_CORE_INFO("Init Log");
 
     auto *app = Azure::Application::CreateApp();
-       app->PushLayer(new ExampleLayer());
+    app->PushOverlay(new ExampleLayer());
     //    app->PushOverlay(new Azure::ImGuiLayer());
     app->Run();
     delete app;

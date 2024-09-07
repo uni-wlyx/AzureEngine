@@ -22,8 +22,24 @@ namespace Azure
         m_roll = rotation.y;
         m_yaw = rotation.z;
 
-        m_cameraType = cameraType;
+        SetCameraType(cameraType);
+        // m_cameraType = cameraType;
 
+        // UpDateViewMatrix();
+        // if (cameraType == ECameraType::Orthographic)
+        // {
+        //     SetProjection(mo_left, mo_right, mo_top, mo_bottom, mo_zNear, mo_zFar);
+        // }
+        // else if (cameraType == ECameraType::Perspective)
+        // {
+        //     SetProjection(m_fov, m_aspect, m_znear, m_zfar);
+        // }
+    }
+
+    void Camera::SetCameraType(ECameraType cameraType)
+    {
+        m_cameraType = cameraType; 
+        UpDateViewMatrix(); 
         UpDateViewMatrix();
         if (cameraType == ECameraType::Orthographic)
         {
@@ -89,6 +105,20 @@ namespace Azure
             return;
         }
         }
+
+        // //可以直接使用这个
+        // glm::vec3 front;
+
+        // front.x = glm::cos(glm::radians(m_yaw)) * glm::cos(glm::radians(m_pitch));
+        // front.y = glm::sin(glm::radians(m_pitch));
+        // front.z = glm::sin(glm::radians(m_yaw)) * glm::cos(glm::radians(m_pitch));
+        // m_front = glm::normalize(front);
+
+        // m_right = glm::normalize(glm::cross(front, m_worldUp));
+        // m_up = glm::normalize(glm::cross(m_right, front));
+
+        // m_viewMatrix = glm::lookAt(m_position, m_position + m_front, m_up);
+
 
         m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
     }

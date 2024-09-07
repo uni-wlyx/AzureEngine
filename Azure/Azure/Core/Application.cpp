@@ -102,6 +102,6 @@ namespace Azure
     bool Application::OnWindowResize(WindowResizeEvent &e)
     {
         RenderCommand::ResizeViewport(e.GetWidth(), e.GetHeight());
-        return true;
+        return false;
     }
 }

@@ -21,12 +21,12 @@ namespace Azure {
         void OnAttach() override;
         void OnDetach() override;
 
-        void OnImGuiRender() override;
+		void BlockEvents(bool block) { m_blockEvents = block; }
 
         void Begin();
         void End();
-    private:
-        float m_time = 0.0f;
+	private:
+		bool m_blockEvents = true;
     };
 
 } // Azure

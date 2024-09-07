@@ -42,7 +42,7 @@ namespace Azure
 		const glm::mat4& GetViewProjectionMatrix() const { return m_viewProjectionMatrix; }
 
         ECameraType CameraType() const { return m_cameraType; }
-        void SetCameraType(ECameraType cameraType) { m_cameraType = cameraType;};
+        void SetCameraType(ECameraType cameraType);
 
         void SetProjection(float left, float right, float bottom, float top,float znear, float zfar);
 

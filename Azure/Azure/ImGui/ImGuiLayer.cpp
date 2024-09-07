@@ -33,7 +33,7 @@ namespace Azure {
         io.ConfigFlags |= ImGuiCol_DockingEmptyBg;
 
         Application &app = Application::Get();
-        auto *window = static_cast<GLFWwindow *>(app.GetWindow().GetNativeWindow());
+        GLFWwindow *window = static_cast<GLFWwindow *>(app.GetWindow().GetNativeWindow());
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
@@ -66,16 +66,6 @@ namespace Azure {
             ImGui::RenderPlatformWindowsDefault();
             glfwMakeContextCurrent(backup_current_context);
         }
-    }
-
-    void ImGuiLayer::OnImGuiRender() {
-        ImGuiIO &io = ImGui::GetIO();
-        ImGui::Begin("xxx");
-        ImGui::Text("FPS:%.1f/%.3f ms", io.Framerate, 1000.0f / io.Framerate);
-
-        ImGui::End();
-//        static bool show = true;
-//        ImGui::ShowDemoWindow(&show);
     }
 
 } // Azure
