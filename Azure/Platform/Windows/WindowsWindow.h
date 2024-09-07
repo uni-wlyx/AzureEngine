@@ -27,9 +27,9 @@ namespace Azure {
         void * GetNativeWindow() const override;
 
     // private:
-        virtual void Init(const WindowProps &props = WindowProps()) override;
+        void Init(const WindowProps &props = WindowProps()) override;
 
-        virtual void ShutDown() override;
+        void ShutDown() override;
 
     private:
         GLFWwindow *m_window;

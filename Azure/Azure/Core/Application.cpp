@@ -26,6 +26,8 @@ namespace Azure
         m_window->Init();
         m_window->SetEventCallback(AZ_BIND_EVENT(Application::OnEvent));
 
+        Renderer::Init();
+
         m_ImGuiLayer = new ImGuiLayer();
         // stack会自动管理指针
         PushOverlay(m_ImGuiLayer);

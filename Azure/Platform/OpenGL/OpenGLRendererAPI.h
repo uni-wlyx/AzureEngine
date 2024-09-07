@@ -10,11 +10,12 @@ namespace Azure
     class OpenGLRendererAPI : public RendererAPI
     {
     public:
-        virtual void SetClearColor(const glm::vec4 &color) override;
-        virtual void Clear() override;
+        void Init() override;
+        void SetClearColor(const glm::vec4 &color) override;
+        void Clear() override;
 
-        virtual void DrawIndexed(const Ref<VertexArray> &vertexArray) override;
-        virtual void ResizeViewport(int width, int height) override;
+        void DrawIndexed(const Ref<VertexArray> &vertexArray) override;
+        void SetViewport(int width, int height) override;
 
     private:
     };

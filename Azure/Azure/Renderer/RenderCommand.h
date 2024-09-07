@@ -9,6 +9,11 @@ namespace Azure
     class AZURE_API RenderCommand
     {
     public:
+        static void Init()
+        {
+            s_RendererAPI->Init();
+        }
+
         static void DrawIndexed(const Ref<VertexArray> &vertexArray)
         {
             s_RendererAPI->DrawIndexed(vertexArray);
@@ -23,10 +28,10 @@ namespace Azure
         {
             s_RendererAPI->Clear();
         }
-        
+
         static void ResizeViewport(int width, int height)
         {
-            s_RendererAPI->ResizeViewport(width, height);
+            s_RendererAPI->SetViewport(width, height);
         }
 
     private:

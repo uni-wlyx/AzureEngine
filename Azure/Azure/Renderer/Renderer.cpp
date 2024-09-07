@@ -8,6 +8,15 @@ namespace Azure
 
     Scope<Renderer::SceneData> Renderer::s_SceneData = CreateScope<Renderer::SceneData>();
 
+    void Renderer::Init() {
+        RenderCommand::Init();
+    }
+
+    void Renderer::Shutdown() {
+
+    }
+
+
     void Renderer::BeginScene(Camera &camera)
     {
         s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
@@ -25,5 +34,6 @@ namespace Azure
         vertexArray->Bind();
         RenderCommand::DrawIndexed(vertexArray);
     }
+
 
 } // namespace Azure

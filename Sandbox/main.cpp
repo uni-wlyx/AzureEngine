@@ -169,14 +169,14 @@ public:
 
     virtual void OnImGuiRender() override
     {
-      
 
-        ImGui::Begin("xxx");
-        // ImGui::Text("FPS:%.1f/%.3f ms", io.Framerate, 1000.0f / io.Framerate);
-        ImGui::Text("12321");
-        ImGui::End();
 
-        // ImGui::ShowDemoWindow();
+//        ImGui::Begin("xxx");
+//        // ImGui::Text("FPS:%.1f/%.3f ms", io.Framerate, 1000.0f / io.Framerate);
+//        ImGui::Text("12321");
+//        ImGui::End();
+
+         ImGui::ShowDemoWindow();
         // ImGui::Begin("qwewq");
         // // if (ImGui::Button("o"))
         // // {
@@ -200,7 +200,7 @@ private:
     Azure::Ref<Azure::Shader> m_shader;
 };
 
-// class 
+// class
 
 int main()
 {

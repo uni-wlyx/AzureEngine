@@ -20,8 +20,16 @@ namespace Azure
 
         glDrawElements(GL_TRIANGLES,vertexArray->GetIndexBuffer()->GetCount(),GL_UNSIGNED_INT, nullptr);
     }
-    void OpenGLRendererAPI::ResizeViewport(int width, int height)
+    void OpenGLRendererAPI::SetViewport(int width, int height)
     {
         glViewport(0,0,width,height);
+    }
+
+    void OpenGLRendererAPI::Init() {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_LINE_SMOOTH);
     }
 }
