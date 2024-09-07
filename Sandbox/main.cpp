@@ -167,16 +167,27 @@ public:
         Azure::Renderer::EndScene();
     }
 
-    virtual void OnImGuiRender() override
+    virtual void OnImGuiRender(ImGuiContext * context) override
     {
 
+        ImGui::SetCurrentContext(context);
+        ImGuiIO& io = ImGui::GetIO();
+        ImGui::Begin("xxx");
+         ImGui::Text("FPS:%.1f/%.3f ms", io.Framerate, 1000.0f / io.Framerate);
 
-//        ImGui::Begin("xxx");
-//        // ImGui::Text("FPS:%.1f/%.3f ms", io.Framerate, 1000.0f / io.Framerate);
-//        ImGui::Text("12321");
-//        ImGui::End();
 
-         ImGui::ShowDemoWindow();
+          if (ImGui::Button("o"))
+          {
+              m_camera.SetCameraType(Azure::ECameraType::Orthographic);
+          }
+          if (ImGui::Button("p"))
+          {
+              m_camera.SetCameraType(Azure::ECameraType::Perspective);
+          }
+
+        ImGui::End();
+
+//         ImGui::ShowDemoWindow();
         // ImGui::Begin("qwewq");
         // // if (ImGui::Button("o"))
         // // {

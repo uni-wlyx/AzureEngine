@@ -14,7 +14,7 @@ namespace Azure {
 
     void ImGuiLayer::OnAttach() {
         IMGUI_CHECKVERSION();
-        ImGui::CreateContext();
+        m_context = ImGui::CreateContext();
         ImGui::StyleColorsLight();
 
         ImGuiIO &io = ImGui::GetIO();
@@ -42,6 +42,7 @@ namespace Azure {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
+        m_context = nullptr;
     }
 
     void ImGuiLayer::Begin() {

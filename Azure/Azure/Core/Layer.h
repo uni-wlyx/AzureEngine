@@ -5,6 +5,8 @@
 #include "Azure/Core.h"
 #include "Azure/Events/Event.h"
 
+struct ImGuiContext;
+
 namespace Azure {
     /**
      * 层
@@ -19,7 +21,7 @@ namespace Azure {
 
         virtual void OnDetach() {}
 
-        virtual void OnImGuiRender() {};
+        virtual void OnImGuiRender(ImGuiContext * context) {};
 
         virtual void OnUpdate(float deltaTime) {}
 

@@ -25,8 +25,12 @@ namespace Azure {
 
         void Begin();
         void End();
+
+        ImGuiContext* GetContext() const { return m_context; }
 	private:
 		bool m_blockEvents = true;
+
+        ImGuiContext* m_context = nullptr;
     };
 
 } // Azure

@@ -53,7 +53,7 @@ namespace Azure
             m_ImGuiLayer->Begin();
             for (Layer *layer : m_layerStack)
             {
-                layer->OnImGuiRender();
+                layer->OnImGuiRender(m_ImGuiLayer->GetContext());
             }
             m_ImGuiLayer->End();
 
