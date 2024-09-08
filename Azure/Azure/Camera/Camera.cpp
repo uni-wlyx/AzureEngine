@@ -40,7 +40,7 @@ namespace Azure
     {
         m_cameraType = cameraType; 
         UpDateViewMatrix(); 
-        UpDateViewMatrix();
+
         if (cameraType == ECameraType::Orthographic)
         {
             SetProjection(mo_left, mo_right, mo_top, mo_bottom, mo_zNear, mo_zFar);
@@ -68,9 +68,11 @@ namespace Azure
     {
 
         m_fov = fov;
+        m_fov = 45;
         m_aspect = aspect;
         m_znear = znear;
         m_zfar = zfar;
+        m_zfar = 100;
 
         m_projectionMatrix = glm::perspective(glm::radians(m_fov), m_aspect,m_znear,m_zfar);             
         

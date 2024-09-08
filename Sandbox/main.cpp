@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Azure.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 class ExampleLayer : public Azure::Layer
 {
@@ -144,25 +145,26 @@ public:
 
         m_shader = Azure::CreateRef<Azure::Shader>(vertexSrc, fragmentSrc);
 
-        m_camera = Azure::Camera::CreateOrthographic();
-        m_camera.SetPosition({0, 0, 0});
+        m_camera = Azure::Camera::CreatePerspective();
+        m_camera.SetPosition({-3, 0, 0});
         m_camera.SetRotation({0, 0, 0});
     }
 
     float spp = 0;
-
+    glm::mat4 model = glm::mat4(1);
     void OnUpdate(float deltaTime) override
     {
 
-        spp++;
-        // m_camera.SetRotation({0,0, spp});
+        spp+=30.0f * deltaTime;
+        glm::mat4 model = glm::mat4(1);
+        model = glm::rotate(model,glm::radians(spp),glm::vec3(0,1,1));
 
         Azure::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         Azure::RenderCommand::Clear();
 
         Azure::Renderer::BeginScene(m_camera);
 
-        Azure::Renderer::Submit(m_shader, m_vertexArray);
+        Azure::Renderer::Submit(m_shader, m_vertexArray,model);
 
         Azure::Renderer::EndScene();
     }
