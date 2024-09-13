@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Azure.h>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Azure::Layer
 {
@@ -146,18 +147,21 @@ public:
         m_shader = Azure::CreateRef<Azure::Shader>(vertexSrc, fragmentSrc);
 
         m_camera = Azure::Camera::CreatePerspective();
-        m_camera.SetPosition({-3, 0, 0});
+        m_camera.SetPosition({0, 0, 3});
         m_camera.SetRotation({0, 0, 0});
     }
-
+    float xp =0 ;
     float spp = 0;
+    
+    glm::vec3 pos = {0,0,0};
     glm::mat4 model = glm::mat4(1);
     void OnUpdate(float deltaTime) override
     {
 
+        m_camera.SetPosition(pos);
         spp+=30.0f * deltaTime;
         glm::mat4 model = glm::mat4(1);
-        model = glm::rotate(model,glm::radians(spp),glm::vec3(0,1,1));
+        model = glm::rotate(model,glm::radians(spp),glm::vec3(0,0,1));
 
         Azure::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         Azure::RenderCommand::Clear();
@@ -169,6 +173,7 @@ public:
         Azure::Renderer::EndScene();
     }
 
+    
     virtual void OnImGuiRender(ImGuiContext * context) override
     {
 
@@ -176,8 +181,8 @@ public:
         ImGuiIO& io = ImGui::GetIO();
         ImGui::Begin("xxx");
          ImGui::Text("FPS:%.1f/%.3f ms", io.Framerate, 1000.0f / io.Framerate);
-
-
+        ImGui::SliderFloat("xp",&xp,-10,10);
+        ImGui::SliderFloat3("pos",glm::value_ptr(pos),-10,10);
           if (ImGui::Button("o"))
           {
               m_camera.SetCameraType(Azure::ECameraType::Orthographic);

@@ -21,6 +21,8 @@ namespace Azure {
 
         virtual void OnDetach() {}
 
+        /// @brief 如果在dll外使用，调用SetCurrentContext
+        /// @param context 
         virtual void OnImGuiRender(ImGuiContext * context) {};
 
         virtual void OnUpdate(float deltaTime) {}

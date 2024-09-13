@@ -18,9 +18,9 @@ namespace Azure
     Camera::Camera(ECameraType cameraType, glm::vec3 postion, glm::vec3 rotation)
     {
         m_position = postion;
-        m_pitch = rotation.x;
-        m_roll = rotation.y;
-        m_yaw = rotation.z;
+        m_roll = rotation.x;
+        m_yaw = rotation.y;
+        m_pitch = rotation.z;
 
         SetCameraType(cameraType);
         // m_cameraType = cameraType;
@@ -68,11 +68,11 @@ namespace Azure
     {
 
         m_fov = fov;
-        m_fov = 45;
+        // m_fov = 45;
         m_aspect = aspect;
         m_znear = znear;
         m_zfar = zfar;
-        m_zfar = 100;
+        // m_zfar = 100;
 
         m_projectionMatrix = glm::perspective(glm::radians(m_fov), m_aspect,m_znear,m_zfar);             
         

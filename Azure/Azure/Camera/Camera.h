@@ -19,19 +19,19 @@ namespace Azure {
         /// @param rotation 
         /// @return 
         static Camera CreateOrthographic(glm::vec3 postion = glm::vec3(0.0f, 0.0f, 0.0f),
-                                         glm::vec3 rotation = glm::vec3(0.0f, 1.0f, 0.0f));
+                                         glm::vec3 rotation = glm::vec3(0.0f, 0.0f, 0.0f));
 
         /// @brief 
         /// @param postion 
         /// @param rotation 
         /// @return 
         static Camera CreatePerspective(glm::vec3 postion = glm::vec3(0.0f, 0.0f, 0.0f),
-                                        glm::vec3 rotation = glm::vec3(0.0f, 1.0f, -90.0f));
+                                        glm::vec3 rotation = glm::vec3(0.0f, -90.0f, 0.0f));
 
         Camera() = default;
 
         Camera(ECameraType cameraType, glm::vec3 postion = glm::vec3(0.0f, 0.0f, 0.0f),
-               glm::vec3 rotation = glm::vec3(0.0f, 1.0f, -90.0f));
+               glm::vec3 rotation = glm::vec3(0.0f, -90.0f, 0.0f));
 
         const glm::vec3 &GetPosition() const { return m_position; }
 
@@ -40,12 +40,12 @@ namespace Azure {
             UpDateViewMatrix();
         }
 
-        const glm::vec3 GetRotation() const { return glm::vec3(m_pitch, m_roll, m_yaw); }
+        const glm::vec3 GetRotation() const { return glm::vec3(m_roll, m_yaw, m_pitch); }
 
         void SetRotation(const glm::vec3 &rotation) {
-            m_pitch = rotation.x;
-            m_roll = rotation.y;
-            m_yaw = rotation.z;
+            m_roll = rotation.x;
+            m_yaw = rotation.y;
+            m_pitch = rotation.z;
             UpDateViewMatrix();
         }
 
@@ -81,9 +81,9 @@ namespace Azure {
         glm::vec3 m_position = {0.0f, 0.0f, 0.0f};
         glm::vec3 m_up = {0.0f, 1.0f, 0.0f};
 
-        float m_pitch = 0.0f;
-        float m_roll = 0.0f;
-        float m_yaw = -90.0f;
+        float m_roll = 0.0f;//x
+        float m_yaw = -90.0f;//y
+        float m_pitch = 0.0f;//z
         // glm::vec3 m_scale; // 大小应该没有
 
         //正交
