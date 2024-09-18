@@ -144,7 +144,7 @@ public:
                                   "FragColor = vec4(vColor,1.0f);\n"
                                   "}\n";
 
-        m_shader = Azure::CreateRef<Azure::Shader>(vertexSrc, fragmentSrc);
+        m_shader = Azure::Shader::Create(vertexSrc, fragmentSrc);
 
         m_camera = Azure::Camera::CreatePerspective();
         m_camera.SetPosition({0, 0, 3});
