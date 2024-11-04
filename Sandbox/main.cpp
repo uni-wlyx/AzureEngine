@@ -15,56 +15,15 @@ public:
         float hei2 = 0.5;
 
         float vertexs[] = {
-            len2,
-            hei2,
-            -wid2,
-            0.6f,
-            0.34f,
-            0.67f,
-            -len2,
-            hei2,
-            -wid2,
-            0.38f,
-            0.85f,
-            0.75f,
-            -len2,
-            hei2,
-            wid2,
-            0.44f,
-            0.66f,
-            0.28f,
-            len2,
-            hei2,
-            wid2,
-            0.6f,
-            0.34f,
-            0.67f,
+            len2,hei2,-wid2,0,0,
+            -len2,hei2,-wid2,0,1,
+            -len2,hei2,wid2,1,1,
+            len2,hei2,wid2,1,0,
 
-            len2,
-            -hei2,
-            -wid2,
-            0.38f,
-            0.85f,
-            0.75f,
-            -len2,
-            -hei2,
-            -wid2,
-            0.44f,
-            0.66f,
-            0.28f,
-            -len2,
-            -hei2,
-            wid2,
-            0.6f,
-            0.34f,
-            0.67f,
-            len2,
-            -hei2,
-            wid2,
-            0.44f,
-            0.66f,
-            0.28f,
-
+            len2,-hei2,-wid2,0,0,
+            -len2,-hei2,-wid2,0,1,
+            -len2,-hei2,wid2,1,1,
+            len2,-hei2,wid2,1,0,
         };
 
         float vertices[6 * 3] = {
@@ -74,7 +33,7 @@ public:
 
         Azure::Ref<Azure::VertexBuffer> vb = Azure::VertexBuffer::Create(vertexs, sizeof(vertexs));
         vb->SetLayout({{Azure::EShaderDataType::Float3, "a_Postion"},
-                       {Azure::EShaderDataType::Float3, "a_Color"}});
+                       {Azure::EShaderDataType::Float2, "a_TexCoord"},});
 
         m_vertexArray->AddVertexBuffer(vb);
 
@@ -125,23 +84,23 @@ public:
 
         std::string vertexSrc = "#version 330 core\n"
                                 "layout (location = 0) in vec3 aPos;\n"
-                                "layout (location = 1) in vec3 aColor;\n"
+                                "layout (location = 1) in vec2 a_TexCoord;\n"
 
                                 "uniform mat4 u_Transform;;\n"
                                 "uniform mat4 u_ViewProjection;\n"
-                                "out vec3 vColor;\n"
+                                "out vec2 vTexCoord;\n"
                                 "void main()\n"
                                 "{\n"
-                                "vColor = aColor;"
+                                "vTexCoord = a_TexCoord;"
                                 "gl_Position = u_ViewProjection * u_Transform * vec4(aPos.x, aPos.y, aPos.z, 1.0) ;\n"
                                 "}\n";
 
         std::string fragmentSrc = "#version 330 core\n"
                                   "out vec4 FragColor;\n"
-                                  "in vec3 vColor;\n"
+                                  "in vec2 vTexCoord;\n"
                                   "void main()\n"
                                   "{\n"
-                                  "FragColor = vec4(vColor,1.0f);\n"
+                                  "FragColor = vec4(vTexCoord,0.0f,1.0f);\n"
                                   "}\n";
 
         m_shader = Azure::Shader::Create(vertexSrc, fragmentSrc);
@@ -153,7 +112,7 @@ public:
     float xp =0 ;
     float spp = 0;
     
-    glm::vec3 pos = {0,0,0};
+    glm::vec3 pos = {-3,0,0};
     glm::mat4 model = glm::mat4(1);
     void OnUpdate(float deltaTime) override
     {
