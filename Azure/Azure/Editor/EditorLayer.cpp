@@ -89,7 +89,7 @@ namespace Azure
         m_camera.SetPosition({0, 0, 3});
         m_camera.SetRotation({0, 0, 0});
 
-        m_texture = Azure::Texture2D::Create("D:/DownLoad/Checkerboard.png");
+        m_texture = Azure::Texture2D::Create("Content/Materials/Textures/Checkerboard.png");
         std::dynamic_pointer_cast<Azure::OpenGLShader>(m_shader)->Bind();
         std::dynamic_pointer_cast<Azure::OpenGLShader>(m_shader)->UploadUniformInt("uTexture", 0);
     }

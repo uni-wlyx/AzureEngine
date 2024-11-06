@@ -22,3 +22,15 @@ add_library(${AZurLibeName} SHARED ${LIBSOURCE})
 target_precompile_headers(${AZurLibeName} PRIVATE azpch.h)
 #target_include_directories(${AZurLibeName} PRIVATE  "${CMAKE_CURRENT_LIST_DIR}/source")
 target_link_libraries(${AZurLibeName} PRIVATE ${LINK_LIB})
+
+
+#迁移资源文件夹
+file(COPY ${CONTENT_PATH} DESTINATION ${EXE_PATH})
+
+add_custom_command(
+    TARGET ${AZurLibeName}  POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CONTENT_PATH}
+    $<TARGET_FILE_DIR:${AZurLibeName}>/Content
+)
+

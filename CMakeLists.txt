@@ -23,6 +23,8 @@ set(AZURE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Azure)
 set(Sandbox_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Sandbox)
 set(LIBRARY_OUTPUT_PATH ${LIB_PATH})
 set(EXECUTABLE_OUTPUT_PATH ${EXE_PATH})       #设置可执行文件的输出目录
+set(CONTENT_PATH ${CMAKE_SOURCE_DIR}/Content)
+
 
 #设置第三方库
 find_package(glfw3 CONFIG REQUIRED)
@@ -38,4 +40,3 @@ add_subdirectory(${AZURE_PATH})
 add_subdirectory(${Sandbox_PATH})
 
 
-# message(${CMAKE_BUILD_TYPE})
