@@ -2,6 +2,7 @@
 #include <Azure.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <platform/OpenGL/OpenGLShader.h>
 
 class ExampleLayer : public Azure::Layer
 {
@@ -26,10 +27,10 @@ public:
             len2,-hei2,wid2,1,0,
         };
 
-        float vertices[6 * 3] = {
-            -0.5f, -0.5f, 0.0f, 0.6f, 0.34f, 0.67f,
-            0.5f, -0.5f, 0.0f, 0.38f, 0.85f, 0.75f,
-            0.0f, 0.5f, 0.0f, 0.44f, 0.66f, 0.28f};
+        // float vertices[6 * 3] = {
+        //     -0.5f, -0.5f, 0.0f, 0.6f, 0.34f, 0.67f,
+        //     0.5f, -0.5f, 0.0f, 0.38f, 0.85f, 0.75f,
+        //     0.0f, 0.5f, 0.0f, 0.44f, 0.66f, 0.28f};
 
         Azure::Ref<Azure::VertexBuffer> vb = Azure::VertexBuffer::Create(vertexs, sizeof(vertexs));
         vb->SetLayout({{Azure::EShaderDataType::Float3, "a_Postion"},
@@ -39,43 +40,19 @@ public:
 
         // uint32_t indices[3] = {0, 1, 2};
 
-        uint32_t indices[] = {
-            0,
-            1,
-            2,
-            0,
-            2,
-            3,
-            0,
-            4,
-            7,
-            0,
-            7,
-            3,
-            3,
-            7,
-            6,
-            3,
-            6,
-            2,
-            1,
-            5,
-            6,
-            1,
-            6,
-            2,
-            0,
-            4,
-            5,
-            0,
-            1,
-            5,
-            4,
-            7,
-            5,
-            5,
-            6,
-            7,
+        // 0,1,2,0,2,3,
+        // 0,4,7,0,7,3,
+        // 3,7,6,3,6,2,
+        // 1,5,6,1,6,2,
+        // 0,4,5,0,1,5,
+        // 4,7,5,5,6,7,
+        uint32_t indices[6*6] = {
+            0,1,2,0,2,3,
+            0,4,7,0,7,3,
+            3,7,6,3,6,2,
+            1,5,6,1,6,2,
+            0,4,5,0,1,5,
+            4,7,5,5,6,7,
         };
 
         Azure::Ref<Azure::IndexBuffer> ib = Azure::IndexBuffer::Create(indices, sizeof(indices));
@@ -98,9 +75,10 @@ public:
         std::string fragmentSrc = "#version 330 core\n"
                                   "out vec4 FragColor;\n"
                                   "in vec2 vTexCoord;\n"
+                                  "uniform sampler2D uTexture;\n"
                                   "void main()\n"
                                   "{\n"
-                                  "FragColor = vec4(vTexCoord,0.0f,1.0f);\n"
+                                  "FragColor = texture(uTexture,vTexCoord);\n"
                                   "}\n";
 
         m_shader = Azure::Shader::Create(vertexSrc, fragmentSrc);
@@ -108,6 +86,11 @@ public:
         m_camera = Azure::Camera::CreatePerspective();
         m_camera.SetPosition({0, 0, 3});
         m_camera.SetRotation({0, 0, 0});
+
+        m_texture = Azure::Texture2D::Create("D:/DownLoad/Checkerboard.png");
+        std::dynamic_pointer_cast<Azure::OpenGLShader>(m_shader)->Bind();
+        std::dynamic_pointer_cast<Azure::OpenGLShader>(m_shader)->UploadUniformInt("uTexture",0);
+
     }
     float xp =0 ;
     float spp = 0;
@@ -127,6 +110,7 @@ public:
 
         Azure::Renderer::BeginScene(m_camera);
 
+        m_texture->Bind();
         Azure::Renderer::Submit(m_shader, m_vertexArray,model);
 
         Azure::Renderer::EndScene();
@@ -175,6 +159,7 @@ private:
     Azure::Camera m_camera;
     Azure::Ref<Azure::VertexArray> m_vertexArray;
     Azure::Ref<Azure::Shader> m_shader;
+    Azure::Ref<Azure::Texture>m_texture;
 };
 
 // class

@@ -1,5 +1,6 @@
 /Build-Debug/**
 /Build-Realse/**
+/build/**
 /.idea
 /.vscode/*
 /.vs

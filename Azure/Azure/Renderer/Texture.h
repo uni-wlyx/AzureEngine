@@ -22,7 +22,7 @@ namespace Azure
         bool GenerateMips = true;
     };
 
-    class Texture
+    class AZURE_API Texture
     {
     public:
         virtual ~Texture() = default;
@@ -42,14 +42,14 @@ namespace Azure
         virtual bool operator==(const Texture& other) const = 0;
     };
 
-    class Texture2D : public Texture
+    class AZURE_API Texture2D : public Texture
     {
     public:
 		static Ref<Texture2D> Create(const TextureSpecification& specification);
 		static Ref<Texture2D> Create(const std::string& path);
     };
 
-    class Texture3D : public Texture
+    class AZURE_API Texture3D : public Texture
     {
     public:
 		static Ref<Texture2D> Create(const TextureSpecification& specification);

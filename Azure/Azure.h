@@ -18,6 +18,7 @@
 #include "Azure/Renderer/VertexArray.h"
 #include "Azure/Renderer/Buffer.h"
 #include "Azure/Renderer/Shader.h"
+#include "Azure/Renderer/Texture.h"
 
 #include "Azure/Camera/Camera.h"
 

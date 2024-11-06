@@ -1,6 +1,7 @@
 #include "azpch.h"
 #include "OpenGLTexture.h"
 
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 namespace Azure
@@ -66,6 +67,35 @@ namespace Azure
 
             m_width = width;
             m_height = height;
+
+            GLenum internalFormat = 0, dataFormat = 0;
+            if (channels == 4)
+            {
+                internalFormat = GL_RGBA8;
+                dataFormat = GL_RGBA;
+            }
+            else if (channels == 3)
+            {
+                internalFormat = GL_RGB8;
+                dataFormat = GL_RGB;
+            }
+            m_internalFormat = internalFormat;
+            m_dataFormat = dataFormat;
+
+            AZ_CORE_ASSERT(m_internalFormat & m_dataFormat, "Format not supported!");
+
+            glCreateTextures(GL_TEXTURE_2D, 1, &m_rendererID);
+            glTextureStorage2D(m_rendererID, 1, m_internalFormat, m_width, m_height);
+
+            glTextureParameteri(m_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTextureParameteri(m_rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+            glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+            glTextureSubImage2D(m_rendererID, 0, 0, 0, m_width, m_height, dataFormat, GL_UNSIGNED_BYTE, data);
+            
+            stbi_image_free(data);
         }
     }
 
