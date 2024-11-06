@@ -1,6 +1,8 @@
 #include "azpch.h"
 #include "Camera.h"
-
+#include "Azure/Core/Input.h"
+#include "Azure/Core/KeyCodes.h"
+#include "Azure/Core/MouseCodes.h"
 #include <glm/gtx/quaternion.hpp>
 
 namespace Azure
@@ -34,6 +36,46 @@ namespace Azure
         // {
         //     SetProjection(m_fov, m_aspect, m_znear, m_zfar);
         // }
+    }
+
+    void Camera::OnUpdate(float deltaTime)
+    {
+        float velocity = m_moveSpeed * deltaTime;
+        if(Input::IsKeyPressed(Key::W))  
+            m_position +=m_front * velocity;
+        if(Input::IsKeyPressed(Key::S))  m_position -=m_front * velocity;
+        if(Input::IsKeyPressed(Key::A))  m_position -=m_right * velocity;
+        if(Input::IsKeyPressed(Key::D))  m_position +=m_right * velocity;
+
+        if(Input::IsMouseButtonPressed(Mouse::ButtonRight))
+        {
+            auto [xpos,ypos] = Input::GetMousePosition();
+            if(bFirstMouse)
+            {
+                m_lastX = xpos;
+                m_lastY = ypos;
+                bFirstMouse = false;
+            }
+
+            float xoffset = xpos - m_lastX;
+            float yoffset = m_lastY - ypos;
+            m_lastX = xpos;
+            m_lastY = ypos;
+
+            xoffset *=m_sensitivity;
+            yoffset *= m_sensitivity;
+
+            m_yaw   += xoffset;
+            m_pitch += yoffset;
+
+            glm::clamp(m_pitch,-89.0f,89.0f);
+
+        }else
+        {
+             bFirstMouse = true;
+        }
+
+        UpDateViewMatrix();
     }
 
     void Camera::SetCameraType(ECameraType cameraType)

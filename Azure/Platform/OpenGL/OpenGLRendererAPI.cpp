@@ -23,6 +23,7 @@ namespace Azure
     void OpenGLRendererAPI::SetViewport(int width, int height)
     {
         glViewport(0,0,width,height);
+        AZ_CORE_INFO("ResizeViewport:{0},{1}",width,height);
     }
 
     void OpenGLRendererAPI::Init() {
