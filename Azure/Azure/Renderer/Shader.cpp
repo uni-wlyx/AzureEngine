@@ -17,4 +17,15 @@ namespace Azure
         return nullptr;
     }
 
+    Ref<Shader> Shader::Create(const std::string &filePath)
+    {
+        switch (Renderer::GetAPI())
+        {
+            case RendererAPI::API::None: AZ_CORE_ASSERT(false,"No Renderer API!!!");
+            case RendererAPI::API::OpenGL: return CreateRef<OpenGLShader>(filePath);
+        }
+        AZ_ASSERT(false, "UnKonwn Renderer API!!!");
+        return nullptr;
+    }
+
 } // Azure

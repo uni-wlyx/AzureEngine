@@ -83,7 +83,7 @@ namespace Azure
                                   "FragColor = texture(uTexture,vTexCoord);\n"
                                   "}\n";
 
-        m_shader = Azure::Shader::Create(vertexSrc, fragmentSrc);
+        m_shader = Azure::Shader::Create("Content/Materials/Texture.glsl");
 
         m_camera = Azure::Camera::CreatePerspective();
         m_camera.SetPosition({0, 0, 3});
