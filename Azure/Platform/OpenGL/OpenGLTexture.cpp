@@ -18,7 +18,7 @@ namespace Azure
             case ImageFormat::RGBA8:
                 return GL_RGBA;
             }
-            AZ_CORE_ASSERT(false);
+            AZ_CORE_ASSERT(false, "Invalid image format");
             return 0;
         };
 
@@ -32,7 +32,7 @@ namespace Azure
                 return GL_RGBA8;
             }
 
-            AZ_CORE_ASSERT(false);
+            AZ_CORE_ASSERT(false ,"Invalid image format");
             return 0;
         }
     }

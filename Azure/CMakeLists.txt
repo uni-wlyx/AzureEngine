@@ -11,9 +11,9 @@ include_directories(${AZURE_PATH})
 
 #add_definitions(-DAZURE_PLATFORM_WINDOWS)
 add_definitions(-DAZURE_EXPORT)
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-DAZ_ENABLE_ASSERTS)
-endif ()
+# if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+add_definitions(-DAZ_ENABLE_ASSERTS)
+# endif ()
 
 add_definitions(-DGLM_ENABLE_EXPERIMENTAL)
 

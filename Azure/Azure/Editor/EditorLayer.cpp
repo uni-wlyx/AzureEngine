@@ -3,7 +3,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <platform/OpenGL/OpenGLShader.h>
 
 namespace Azure
 {
@@ -82,16 +81,15 @@ namespace Azure
                                   "{\n"
                                   "FragColor = texture(uTexture,vTexCoord);\n"
                                   "}\n";
-
-        m_shader = Azure::Shader::Create("Content/Materials/Texture.glsl");
+        m_shader = Renderer::s_ShaderLibrary->Load("Content/Materials/Texture.glsl");
 
         m_camera = Azure::Camera::CreatePerspective();
         m_camera.SetPosition({0, 0, 3});
         m_camera.SetRotation({0, 0, 0});
 
         m_texture = Azure::Texture2D::Create("Content/Materials/Textures/Checkerboard.png");
-        std::dynamic_pointer_cast<Azure::OpenGLShader>(m_shader)->Bind();
-        std::dynamic_pointer_cast<Azure::OpenGLShader>(m_shader)->UploadUniformInt("uTexture", 0);
+        m_shader->Bind();
+        m_shader->SetInt("uTexture", 0);
     }
 
     void EditorLayer::OnUpdate(float deltaTime)

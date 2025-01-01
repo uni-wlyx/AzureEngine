@@ -7,6 +7,7 @@ namespace Azure
 {
 
     Scope<Renderer::SceneData> Renderer::s_SceneData = CreateScope<Renderer::SceneData>();
+    Scope<ShaderLibrary> Renderer::s_ShaderLibrary = CreateScope<ShaderLibrary>();
 
     void Renderer::Init() {
         RenderCommand::Init();

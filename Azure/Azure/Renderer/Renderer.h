@@ -23,12 +23,16 @@ namespace Azure
 
         static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); };
 
+        // static Scope<ShaderLibrary> GetShaderLibrary() { return s_ShaderLibrary; };
+        static Scope<ShaderLibrary> s_ShaderLibrary;
+
     private:
         struct SceneData
         {
             glm::mat4 ViewProjectionMatrix;
         };
         static Scope<SceneData> s_SceneData;
+ 
     };
 } // namespace Azure
 
