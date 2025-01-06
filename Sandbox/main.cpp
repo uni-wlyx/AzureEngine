@@ -2,7 +2,6 @@
 #include <Azure.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <platform/OpenGL/OpenGLShader.h>
 
 #include "Azure/Editor/EditorLayer.h"
 

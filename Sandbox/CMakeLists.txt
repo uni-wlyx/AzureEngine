@@ -7,10 +7,10 @@ MESSAGE("operation system is ${CMAKE_SYSTEM}")
 get_filename_component(PARENT_FOLDER_ABSOLUTE2 ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 file(GLOB_RECURSE SOURCE_FILE "*.cpp" "*.h")
 
-#message("${AZUR_PATH}")
+# mess
 include_directories(${AZURE_PATH})
 link_directories(${LIB_PATH})
 
 add_executable(AzureEngine ${SOURCE_FILE})
 
-target_link_libraries(AzureEngine ${LINK_LIB} Azure.dll)
+target_link_libraries(AzureEngine  Azure)

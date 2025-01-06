@@ -7,6 +7,7 @@ set(CMAKE_TOOLCHAIN_FILE )
 #添加预编译宏
 IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
     MESSAGE( "current platform: Linux ")
+    add_definitions(-DAZURE_PLATFORM_LINUX)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
     add_definitions(-DAZURE_PLATFORM_WINDOWS)
     MESSAGE( "current platform: Windows")
@@ -26,17 +27,69 @@ set(EXECUTABLE_OUTPUT_PATH ${EXE_PATH})       #设置可执行文件的输出目
 set(CONTENT_PATH ${CMAKE_SOURCE_DIR}/Content)
 
 
+set(TRD_PATH ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty)
+
 #设置第三方库
-find_package(glfw3 CONFIG REQUIRED)
+
+
+set (GLAD_INCLUDE_DIR ${TRD_PATH}/glad/include)
+set(GLAD_LIB glad)
+
+set(GLFW_INCLUDE_DIR ${TRD_PATH}/glfw/include)
+set(GLFW_LIB glfw)
+
+set(GLM_INCLUDE_DIR ${TRD_PATH}/glm)
+
+set(STB_INCLUDE_DIR ${TRD_PATH}/stb)
+
+set ( IMGUI_INCLUDE_DIRS 
+                ${TRD_PATH}/imgui/ 
+                ${TRD_PATH}/imgui/backends)
+set ( IMGUI_LIBRARY imgui )
+
+set (SPDLOG_INCLUDE_DIR ${TRD_PATH}/spdlog/include)
+set (SPDLOG_LIB spdlog::spdlog)
+
+set (OPENGL_LIB OpenGL::GL)
+
+# include_directories(${TRD_PATH}/spdlog/include)
+# # include_directories(${TRD_PATH}/imgui)
+# # include_directories(${TRD_PATH}/imgui/backends)
+# include_directories(${TRD_PATH}/glm)
+
+
+set ( Engine_INCLUDES
+    ${GLAD_INCLUDE_DIR}
+    ${GLFW_INCLUDE_DIR}
+    ${GLM_INCLUDE_DIR}
+    ${STB_INCLUDE_DIR}
+    ${IMGUI_INCLUDE_DIRS}
+    ${SPDLOG_INCLUDE_DIR}
+    )
+
+set ( Engine_LIBS
+    ${OPENGL_LIB}
+    ${GLFW_LIB}
+    ${SPDLOG_LIB}
+    ${IMGUI_LIBRARY}
+    ${GLAD_LIB})
+
+
+add_subdirectory(${TRD_PATH})
+
+
+# find_package(${CMAKE_CURRENT_SOURCE_DIR}/3rdpart/glfw CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(GLEW REQUIRED)
-find_package(glad CONFIG REQUIRED)
-find_package(glm CONFIG REQUIRED)
-find_package(spdlog CONFIG REQUIRED)
-find_package(imgui CONFIG REQUIRED)
-set(LINK_LIB PRIVATE glfw OpenGL::GL GLEW::GLEW glad::glad glm::glm spdlog::spdlog imgui::imgui)
+# find_package(GLEW REQUIRED)
+# find_package(glad CONFIG REQUIRED)
+# find_package(glm CONFIG REQUIRED)
+# find_package(spdlog CONFIG REQUIRED)
+# find_package(imgui CONFIG REQUIRED)
+# set(Engine_LIBS PRIVATE glfw)
+
+#set(Engine_LIBS PRIVATE glfw OpenGL::GL GLEW::GLEW glad::glad glm::glm spdlog::spdlog imgui::imgui)
+
+include_directories(${Engine_INCLUDES})
 
 add_subdirectory(${AZURE_PATH})
 add_subdirectory(${Sandbox_PATH})
-
-

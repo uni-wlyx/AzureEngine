@@ -40,14 +40,9 @@ namespace Azure {
 
         if (!s_GLFWInitialized) {
             int success = glfwInit();
+
             AZ_CORE_ASSERT(success, "Failed to initialize GLFW");
-
-
-//            if (!success) {
-//                AZ_CORE_ERROR("Failed to initialize GLFW");
-//            } else {
-//                AZ_CORE_INFO("Initialized GLFW");
-//            };
+            
             s_GLFWInitialized = true;
         }
 

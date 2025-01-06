@@ -9,11 +9,20 @@
     #else
         #define AZURE_API __declspec(dllimport)
     #endif
+    #else
+        #define AZURE_API  
 #endif
 
+
+#ifdef AZURE_PLATFORM_WINDOWS
+        #define DEBUG_BREAK()  __debugbreak()
+    #else
+        #define DEBUG_BREAK() __builtin_trap()
+#endif // AZURE_PLATFORM_WINDOWS
+
 #ifdef AZ_ENABLE_ASSERTS
-    #define AZ_ASSERT(x,...) {if(!(x)){AZ_ERROR("Assertion Failed:{0)",__VA_ARGS__);__debugbreak();}}
-    #define AZ_CORE_ASSERT(x,...) {if(!(x)){AZ_CORE_ERROR("Assertion Failed:{0)",__VA_ARGS__);__debugbreak();}}
+    #define AZ_ASSERT(x,...) {if(!(x)){AZ_ERROR("Assertion Failed:{}",__VA_ARGS__);DEBUG_BREAK();}}
+    #define AZ_CORE_ASSERT(x,...) {if(!(x)){AZ_CORE_ERROR("Assertion Failed:{}",__VA_ARGS__);DEBUG_BREAK();}}
 #else
     #define AZ_ASSERT(x,...)
     #define AZ_CORE_ASSERT(x,...)
