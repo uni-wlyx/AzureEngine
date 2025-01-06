@@ -52,6 +52,9 @@ set (SPDLOG_LIB spdlog::spdlog)
 
 set (OPENGL_LIB OpenGL::GL)
 
+set ( SDL2_INCLUDE_DIR ${TRD_PATH}/sdl2/include)
+set ( SDL2_LIB SDL2::SDL2 )
+
 # include_directories(${TRD_PATH}/spdlog/include)
 # # include_directories(${TRD_PATH}/imgui)
 # # include_directories(${TRD_PATH}/imgui/backends)
@@ -59,6 +62,7 @@ set (OPENGL_LIB OpenGL::GL)
 
 
 set ( Engine_INCLUDES
+    ${SDL2_INCLUDE_DIR}
     ${GLAD_INCLUDE_DIR}
     ${GLFW_INCLUDE_DIR}
     ${GLM_INCLUDE_DIR}
@@ -72,7 +76,9 @@ set ( Engine_LIBS
     ${GLFW_LIB}
     ${SPDLOG_LIB}
     ${IMGUI_LIBRARY}
-    ${GLAD_LIB})
+    ${GLAD_LIB}
+    ${SDL2_LIB}
+    )
 
 
 add_subdirectory(${TRD_PATH})
