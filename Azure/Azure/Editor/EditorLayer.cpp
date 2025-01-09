@@ -94,7 +94,6 @@ namespace Azure
 
     void EditorLayer::OnUpdate(float deltaTime)
     {
-        
         m_camera.OnUpdate(deltaTime);
 
         // m_camera.SetPosition(pos);
@@ -134,5 +133,6 @@ namespace Azure
     }
     void EditorLayer::OnEvent(Azure::Event &event)
     {
+        
     }
 }

@@ -1,22 +1,25 @@
-
 #ifndef OPENGLCONTEXT_H
 #define OPENGLCONTEXT_H
 
+#pragma once
+
 #include "Azure/Renderer/GraphicsContext.h"
 
-struct GLFWwindow;
+struct SDL_Window;
 
 namespace Azure {
     class OpenGLContext : public GraphicsContext {
     public:
-        OpenGLContext(GLFWwindow *windowHandle);
+        void Init(const void * window) override;
 
-        void Init() override;
+        void ShutDown() override;
 
         void SwapBuffers() override;
 
     private:
-        GLFWwindow* m_windowHandle;
+        SDL_Window* m_windowHandle;
+        void * m_context;
+
     };
 }
 

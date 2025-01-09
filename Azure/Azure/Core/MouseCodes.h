@@ -10,7 +10,6 @@ namespace Azure{
     {
         enum : MouseCode
         {
-            // From glfw3.h
             Button0                = 0,
             Button1                = 1,
             Button2                = 2,
@@ -21,8 +20,8 @@ namespace Azure{
             Button7                = 7,
 
             ButtonLast             = Button7,
-            ButtonLeft             = Button0,
-            ButtonRight            = Button1,
+            ButtonLeft             = Button1,
+            ButtonRight            = Button3,
             ButtonMiddle           = Button2
         };
     }

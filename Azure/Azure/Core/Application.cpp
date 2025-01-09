@@ -39,8 +39,10 @@ namespace Azure
 
     void Application::Run()
     {
+
         while (m_running)
         {
+
             float time = Time::GetTime();
             float deltaTime = time - m_lastUpdateTime;
             m_lastUpdateTime = time;
@@ -79,11 +81,46 @@ namespace Azure
         return new Application();
     }
 
+    bool Mousss(MouseButtonPressedEvent &event)
+    {
+        // if (event.GetMouseButton() == Mouse::ButtonLeft)
+        // {
+        //     AZ_INFO("Mouse:left");
+
+        //     uint32_t mouseButton = SDL_GetMouseState(0, 0);
+
+        //     AZ_INFO("Event:{}", (SDL_BUTTON(Mouse::ButtonLeft) & mouseButton)!=0 );
+        // }
+        
+
+        // if (event.GetMouseButton() == Mouse::ButtonRight)
+        // {
+        //     AZ_INFO("Mouse:right");
+
+        //     uint32_t mouseButton = SDL_GetMouseState(0, 0);
+        //     AZ_INFO("Event:{}", (SDL_BUTTON(Mouse::ButtonRight) & mouseButton)!=0 );
+        // }
+        // if (event.GetMouseButton() == Mouse::ButtonMiddle)
+        // {
+        //     AZ_INFO("Mouse:mid");
+
+        //     uint32_t mouseButton = SDL_GetMouseState(0, 0);
+        //     AZ_INFO("Event:{}", (SDL_BUTTON(Mouse::ButtonMiddle) & mouseButton)!=0 );
+        // }
+
+        return false;
+    }
+
     void Application::OnEvent(Azure::Event &event)
     {
         EventDispatcher dispatcher(event);
+        // AZ_INFO("Event:{}",event.GetName());
+        //    uint32_t mouseButton = SDL_GetMouseState(0,0);
+        // AZ_INFO("Event:{}",event.GetName());
+
         dispatcher.Dispatch<WindowCloseEvent>(AZ_BIND_EVENT(Application::OnWindowClose));
         dispatcher.Dispatch<WindowResizeEvent>(AZ_BIND_EVENT(Application::OnWindowResize));
+        dispatcher.Dispatch<MouseButtonPressedEvent>(Mousss);
 
         for (auto iter = m_layerStack.end(); iter != m_layerStack.begin();)
         {

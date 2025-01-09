@@ -4,10 +4,15 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_TOOLCHAIN_FILE )
 
+
+
+
 #添加预编译宏
 IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
     MESSAGE( "current platform: Linux ")
     add_definitions(-DAZURE_PLATFORM_LINUX)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
     add_definitions(-DAZURE_PLATFORM_WINDOWS)
     MESSAGE( "current platform: Windows")
@@ -35,9 +40,6 @@ set(TRD_PATH ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty)
 set (GLAD_INCLUDE_DIR ${TRD_PATH}/glad/include)
 set(GLAD_LIB glad)
 
-set(GLFW_INCLUDE_DIR ${TRD_PATH}/glfw/include)
-set(GLFW_LIB glfw)
-
 set(GLM_INCLUDE_DIR ${TRD_PATH}/glm)
 
 set(STB_INCLUDE_DIR ${TRD_PATH}/stb)
@@ -53,7 +55,10 @@ set (SPDLOG_LIB spdlog::spdlog)
 set (OPENGL_LIB OpenGL::GL)
 
 set ( SDL2_INCLUDE_DIR ${TRD_PATH}/sdl2/include)
-set ( SDL2_LIB SDL2::SDL2 )
+set ( SDL2_LIB SDL2::SDL2main SDL2::SDL2)
+add_definitions(-DSDL_MAIN_HANDLED)
+
+# option(AZURE_USE_SDL2 "Use SDL2 or GLFW3" ON)
 
 # include_directories(${TRD_PATH}/spdlog/include)
 # # include_directories(${TRD_PATH}/imgui)
@@ -62,18 +67,16 @@ set ( SDL2_LIB SDL2::SDL2 )
 
 
 set ( Engine_INCLUDES
-    ${SDL2_INCLUDE_DIR}
     ${GLAD_INCLUDE_DIR}
-    ${GLFW_INCLUDE_DIR}
     ${GLM_INCLUDE_DIR}
     ${STB_INCLUDE_DIR}
     ${IMGUI_INCLUDE_DIRS}
     ${SPDLOG_INCLUDE_DIR}
+    ${SDL2_INCLUDE_DIR}
     )
 
 set ( Engine_LIBS
     ${OPENGL_LIB}
-    ${GLFW_LIB}
     ${SPDLOG_LIB}
     ${IMGUI_LIBRARY}
     ${GLAD_LIB}

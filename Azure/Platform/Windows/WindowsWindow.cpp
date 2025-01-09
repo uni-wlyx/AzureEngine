@@ -1,14 +1,12 @@
 #include "azpch.h"
 
-#include "WindowsWindow.h"
+#ifdef AZURE_WINODW_API_GLFW
+    #include "WindowsWindow.h"
 #include "WindowsInput.h"
 
 #include "Azure/Events/ApplicationEvent.h"
 #include "Azure/Events/KeyEvent.h"
 #include "Azure/Events/MouseEvent.h"
-
-//#include "Platform/OpenGL/"
-#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Azure {
 
@@ -46,13 +44,13 @@ namespace Azure {
             s_GLFWInitialized = true;
         }
 
-        // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         m_window = glfwCreateWindow((int) m_Data.Width, (int) m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
-        m_context = new OpenGLContext(m_window);
-        m_context->Init();
+        m_context = GraphicsContext::Create(GraphicsContext::RenderWindowAPI::GLFW);
+        m_context->Init(m_window);
 
         glfwSetWindowUserPointer(m_window, &m_Data);
         glfwSetWindowSizeCallback(m_window, [](GLFWwindow *window, int width, int height) {
@@ -120,3 +118,5 @@ namespace Azure {
         return m_window;
     }
 }
+#endif
+

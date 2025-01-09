@@ -5,7 +5,9 @@
 #include "Azure/Window/Window.h"
 #include "Azure/Renderer/GraphicsContext.h"
 
-#include <GLFW/glfw3.h>
+#ifdef AZURE_WINODW_API_GLFW
+
+    #include <GLFW/glfw3.h>
 //#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Azure {
@@ -33,7 +35,7 @@ namespace Azure {
 
     private:
         GLFWwindow *m_window;
-        GraphicsContext* m_context;
+        Ref <GraphicsContext> m_context;
 
         struct WindowData {
             std::string Title;
@@ -45,6 +47,9 @@ namespace Azure {
         WindowData m_Data;
     };
 }
+
+
+#endif // AZURE_WINODW_API_GLFW
 
 
 #endif //WINDOWSWINDOW_H

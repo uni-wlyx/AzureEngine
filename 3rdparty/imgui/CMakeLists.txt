@@ -6,13 +6,14 @@ project(imgui)
 # add_definitions(-DIMGUI_IMPL_WEBGPU_BACKEND_DAWN )
 # MESSAGE(==========qwewqe==========="${GLFW_INCLUDE_DIR}/../")
 add_definitions(-D_EXPORT)
-add_compile_options(-fPIC)
+# add_compile_options(-fPIC)
+
 file(GLOB ImguiSource "*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/backends/*.cpp" )
 
 add_library(imgui STATIC ${ImguiSource})
 # target_include_directories(imgui PUBLIC  ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/backends)
 
-target_link_libraries(imgui ${GLFW_LIB})
+target_link_libraries(imgui ${SDL2_LIB})
 
 target_include_directories(imgui PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/backends>

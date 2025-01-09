@@ -5,12 +5,7 @@
 
 #include "Azure/Core.h"
 
-
-// // #include <glf>
-// #ifdef AZURE_PLATFORM_WINDOWS
- #include <GLFW/glfw3.h>
-// #endif // AZURE_PLATFORM_WINDOWS
-
+#include "SDL.h"
 
 namespace Azure
 {
@@ -18,11 +13,7 @@ namespace Azure
     {
     public:
         static float GetTime(){
-            #ifdef AZURE_PLATFORM_WINDOWS
-                return (float)glfwGetTime();
-            #else 
-                return 0;
-            #endif //AZURE_PLATFORM_WINDOWS    
+            return SDL_GetTicks()/1000.f;  
         };
     };
 } // namespace Azure

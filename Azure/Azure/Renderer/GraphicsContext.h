@@ -2,17 +2,20 @@
 #ifndef GRAPHICSCONTEXT_H
 #define GRAPHICSCONTEXT_H
 
-namespace Azure {
-    class GraphicsContext {
+namespace Azure
+{
+
+    class GraphicsContext
+    {
     public:
-        GraphicsContext() {};
+        static Ref<GraphicsContext> Create();
 
-        virtual ~GraphicsContext() = default;
+        virtual void Init(const void *window) = 0;
 
-        virtual void Init() = 0;
+        virtual void ShutDown() {};
 
         virtual void SwapBuffers() = 0;
     };
 }
 
-#endif //GRAPHICSCONTEXT_H
+#endif // GRAPHICSCONTEXT_H

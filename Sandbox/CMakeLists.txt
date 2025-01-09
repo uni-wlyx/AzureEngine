@@ -13,4 +13,4 @@ link_directories(${LIB_PATH})
 
 add_executable(AzureEngine ${SOURCE_FILE})
 
-target_link_libraries(AzureEngine  Azure)
+target_link_libraries(AzureEngine PRIVATE Azure)
