@@ -50,6 +50,7 @@ namespace Azure
         if(Input::IsMouseButtonPressed(Mouse::ButtonRight))
         {
             auto [xpos,ypos] = Input::GetMousePosition();
+
             if(bFirstMouse)
             {
                 m_lastX = xpos;
@@ -68,7 +69,7 @@ namespace Azure
             m_yaw   += xoffset;
             m_pitch += yoffset;
 
-            glm::clamp(m_pitch,-89.0f,89.0f);
+            m_pitch = glm::clamp(m_pitch,-89.0f,89.0f);
 
         }else
         {
@@ -85,7 +86,7 @@ namespace Azure
 
         if (cameraType == ECameraType::Orthographic)
         {
-            SetProjection(mo_left, mo_right, mo_top, mo_bottom, mo_zNear, mo_zFar);
+            SetProjection(mo_orthographicSize, mo_zNear, mo_zFar);
         }
         else if (cameraType == ECameraType::Perspective)
         {
@@ -93,16 +94,19 @@ namespace Azure
         }
     }
 
-    void Camera::SetProjection(float left, float right, float bottom, float top, float znear, float zfar)
+
+    void Camera::SetProjection(float orthographicSize, float znear, float zfar)
     {
-        mo_left = left;
-        mo_right = right;
-        mo_top = top;
-        mo_bottom = bottom;
+
+        mo_orthographicSize = orthographicSize;
+        float oleft = -mo_orthographicSize * m_aspect * 0.5f;
+        float oright = mo_orthographicSize * m_aspect * 0.5f;
+        float otop = -mo_orthographicSize * 0.5f;
+        float obottom = mo_orthographicSize * 0.5f;;
         mo_zNear = znear;
         mo_zFar = zfar;
 
-        m_projectionMatrix = (glm::ortho(mo_left, mo_right, mo_bottom, mo_top, mo_zNear, mo_zFar));
+        m_projectionMatrix = (glm::ortho(oleft, oright, obottom, otop, mo_zNear, mo_zFar));
         m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
     }
 
@@ -128,6 +132,26 @@ namespace Azure
         m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
     }
 
+    glm::vec3 Camera::GetUpDirection() const
+    {
+       return glm::rotate(GetOrientation(), glm::vec3(0.0f, 1.0f, 0.0f));
+    }
+
+    glm::vec3 Camera::GetRightDirection() const
+    {
+        return glm::rotate(GetOrientation(), glm::vec3(1.0f, 0.0f, 0.0f));
+    }
+
+    glm::vec3 Camera::GetForwardDirection() const
+    {
+        return glm::rotate(GetOrientation(), glm::vec3(0.0f, 0.0f, -1.0f));
+    }
+
+    glm::quat Camera::GetOrientation() const
+    {
+        return glm::quat(glm::vec3(-m_pitch, -m_yaw, 0.0f));
+    }
+
     void Camera::UpDateViewMatrix()
     {
 
@@ -150,7 +174,23 @@ namespace Azure
         }
         }
 
-        // //可以直接使用这个
+        m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
+    }
+
+    void Camera::UpdateOrthographicView()
+    {
+
+        auto orientation = glm::quat(glm::vec3(-m_pitch, -m_yaw, 0.0f));
+        m_viewMatrix = glm::translate(glm::mat4(1.0f), m_position) * glm::toMat4(orientation);
+		m_viewMatrix = glm::inverse(m_viewMatrix);
+
+        // glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_position) *
+                            //   glm::rotate(glm::mat4(1.0f), glm::radians(m_roll), glm::vec3(0, 0, 1));
+        // m_viewMatrix = glm::inverse(transform);
+    }
+
+    void Camera::UpdatePerspectiveView()
+    {
         // glm::vec3 front;
 
         // front.x = glm::cos(glm::radians(m_yaw)) * glm::cos(glm::radians(m_pitch));
@@ -163,30 +203,17 @@ namespace Azure
 
         // m_viewMatrix = glm::lookAt(m_position, m_position + m_front, m_up);
 
+        m_position = CalculatePosition();
 
-        m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
+		// glm::quat orientation = GetOrientation();
+		// mViewMatrix = glm::translate(glm::mat4(1.0f), mPosition) * glm::toMat4(orientation);
+		// mViewMatrix = glm::inverse(mViewMatrix);
+
     }
 
-    void Camera::UpdateOrthographicView()
+    glm::vec3 Camera::CalculatePosition() const
     {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_position) *
-                              glm::rotate(glm::mat4(1.0f), glm::radians(m_roll), glm::vec3(0, 0, 1));
-        m_viewMatrix = glm::inverse(transform);
-    }
-
-    void Camera::UpdatePerspectiveView()
-    {
-        glm::vec3 front;
-
-        front.x = glm::cos(glm::radians(m_yaw)) * glm::cos(glm::radians(m_pitch));
-        front.y = glm::sin(glm::radians(m_pitch));
-        front.z = glm::sin(glm::radians(m_yaw)) * glm::cos(glm::radians(m_pitch));
-        m_front = glm::normalize(front);
-
-        m_right = glm::normalize(glm::cross(front, m_worldUp));
-        m_up = glm::normalize(glm::cross(m_right, front));
-
-        m_viewMatrix = glm::lookAt(m_position, m_position + m_front, m_up);
+        // return mFocalPoint - GetForwardDirection() * mDistance;
     }
 
 } // namespace Azure

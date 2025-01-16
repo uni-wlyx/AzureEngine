@@ -26,6 +26,7 @@ namespace Azure
             len2,-hei2,wid2,1,0,
         };
 
+
         // float vertices[6 * 3] = {
         //     -0.5f, -0.5f, 0.0f, 0.6f, 0.34f, 0.67f,
         //     0.5f, -0.5f, 0.0f, 0.38f, 0.85f, 0.75f,
@@ -47,13 +48,23 @@ namespace Azure
         // 1,5,6,1,6,2,
         // 0,4,5,0,1,5,
         // 4,7,5,5,6,7,
-        uint32_t indices[6*6] = {
+        // uint32_t indices[6*6] = {3
+        //     0,1,2,0,2,3,
+        //     0,4,7,0,7,3,
+        //     3,7,6,3,6,2,
+        //     1,5,6,1,6,2,
+        //     0,4,5,0,1,5,
+        //     4,7,5,5,6,7,
+        // };
+
+        uint32_t indices[] = {
             0,1,2,0,2,3,
             0,4,7,0,7,3,
             3,7,6,3,6,2,
-            1,5,6,1,6,2,
-            0,4,5,0,1,5,
-            4,7,5,5,6,7,
+                1,2,6,1,6,5,
+
+               0,4,5,0,1,5,
+                4,5,6,4,6,7,
         };
 
         Azure::Ref<Azure::IndexBuffer> ib = Azure::IndexBuffer::Create(indices, sizeof(indices));
@@ -84,7 +95,7 @@ namespace Azure
         m_shader = Renderer::s_ShaderLibrary->Load("Content/Materials/Texture.glsl");
 
         m_camera = Azure::Camera::CreatePerspective();
-        m_camera.SetPosition({0, 0, 3});
+        m_camera.SetPosition({-3, 0, 0});
         m_camera.SetRotation({0, 0, 0});
 
         m_texture = Azure::Texture2D::Create("Content/Materials/Textures/Checkerboard.png");
@@ -99,7 +110,7 @@ namespace Azure
         // m_camera.SetPosition(pos);
         spp+=30.0f * deltaTime;
         glm::mat4 model = glm::mat4(1);
-        model = glm::rotate(model,glm::radians(spp),glm::vec3(0,0,1));
+        // model = glm::rotate(model,glm::radians(spp),glm::vec3(0,0,1));
 
         Azure::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         Azure::RenderCommand::Clear();

@@ -61,9 +61,16 @@ namespace Azure {
 
         void SetCameraType(ECameraType cameraType);
 
-        void SetProjection(float left, float right, float bottom, float top, float znear, float zfar);
+        void SetProjection(float orthographicSize, float znear, float zfar);
 
         void SetProjection(float fov, float aspect, float znear, float zfar);
+
+
+        glm::vec3 GetUpDirection() const;
+		glm::vec3 GetRightDirection() const;
+		glm::vec3 GetForwardDirection() const;
+		const glm::vec3& GetPosition() const { return m_position; }
+		glm::quat GetOrientation() const;
 
     protected:
         virtual void UpDateViewMatrix();
@@ -73,6 +80,8 @@ namespace Azure {
         void UpdatePerspectiveView();
 
         virtual void UpDateProjectionMatrix() {};
+
+        glm::vec3 CalculatePosition() const;
     protected:
         ECameraType m_cameraType;
 
@@ -96,10 +105,7 @@ namespace Azure {
 
         //正交
     protected:
-        float mo_left = -1.0f;
-        float mo_right = 1.0f;
-        float mo_bottom = -1.0f;
-        float mo_top = 1.0f;
+        float mo_orthographicSize = 10.0f;
         float mo_zNear = -1.0f;
         float mo_zFar = 1.0f;
 
